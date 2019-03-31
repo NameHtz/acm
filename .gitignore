@@ -22,4 +22,4 @@ yarn-error.log*
 
 .next
 .idea
-
+.vscode
