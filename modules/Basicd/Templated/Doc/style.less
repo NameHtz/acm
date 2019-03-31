@@ -1,0 +1,25 @@
+.main {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  .leftMain {
+    width: 100%;
+    overflow: auto
+  }
+  .clickRowStyl {
+    background-color: #e7f7ff
+  }
+  .pTable {
+    :global {
+      .ant-table td, .ant-table th {
+        white-space: nowrap;
+      }
+    }
+  }
+  :global {
+    .ant-table td, .ant-table th {
+      white-space: nowrap;
+    }
+
+  }
+}

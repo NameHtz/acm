@@ -1,0 +1,27 @@
+.main {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  .leftMain {
+    width: 100%;
+    overflow: auto
+  }
+  .boxhieht {
+    position: relative;
+    height: 100%;
+    .footerpagination {
+      width: 100%;
+      position: absolute;
+      bottom: 5px;
+      padding: 0 10px;
+    }
+  }
+  :global {
+    .ant-table td, .ant-table th {
+      white-space: nowrap;
+    }
+  }
+  .clickRowStyl {
+    background-color: #e7f7ff
+  }
+}
