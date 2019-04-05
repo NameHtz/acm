@@ -6,6 +6,9 @@ import TopTags from './TopTags/index'
 import RightTags from '../../../components/public/RightTags/index'
 import _ from "lodash";
 
+import {meetingList} from '../../../api/api'
+import axios from '../../../api/axios'
+
 /* *********** 引入redux及redux方法 start ************* */
 import { connect } from 'react-redux'
 import store from '../../../store'
@@ -150,6 +153,13 @@ export class ComcateMeeting extends Component {
         //判断索引相等时添加行的高亮样式
         return record.id === this.state.activeIndex ? `${style['clickRowStyl']}` : "";
     };
+
+    // 获取会议管理列表
+    // getMeetingList = ()=>{
+    //     axios.get(meetingList(' ', ))
+    // }
+
+
     render() {
         const rowSelection = {
             onChange: (selectedRowKeys, selectedRows) => {

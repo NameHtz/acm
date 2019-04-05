@@ -182,7 +182,7 @@ export const setBolist = `api/base/set/bo/list`   //业务编码
 export const getBaseSelectTree = typeCode => `api/base/dict/${typeCode}/select/tree`   //保存更新全局设置
 
 //--> 沟通管理
-export const meetingList = (id,currentPageNum,pageSize) => `api/comu/meeting/${id}/list/${currentPageNum}/${pageSize}` //post 沟通管理-会议管理列表
+export const meetingList = (projectId,pageSize,currentPageNum) => `api/comu/meeting/${projectId}/${pageSize}/${currentPageNum}/list` //get 沟通管理-会议管理列表
 export const meetingRelease = id => `api/comu/meeting/${id}/release`   // put 沟通管理-直接发布会议 
 export const releaseApproval = id => `api/comu/meeting/${id}/release/approval` // put 沟通管理-发布审批会议
 export const meetingCancel = id => `api/comu/meeting/${id}/cancel`  // put 沟通管理-取消发布会议
@@ -195,7 +195,7 @@ export const meetingActionDelete = `api/comu/meeting/action/delete` // delete �
 export const meetingActionAdd = id => `api/comu/meeting/${id}/action/add`  // post 沟通管理-增加会议行动项
 export const getMeetingActionInfo = id => `api/comu/meeting/action/${id}/info` // get 沟通管理-回忆行动项信息
 export const meetingActionUpdate = `api/comu/meeting/action/update`  // put 沟通管理-修改项目会议行动项
-export const  questionList = (pageSize,currentPageNum) => `api/comu/question/list/${pageSize}/${currentPageNum}`  //post 沟通管理-获取问题列表
+export const  questionList = (projectId,pageSize,currentPageNum) => `api/comu/question/${projectId}/${pageSize}/${currentPageNum}/list`  //get 沟通管理-获取问题列表
 export const questionInfo = id => `api/comu/question/${id}/info`  // get 沟通管理-获取问题信息
 export const questionAdd = `api/comu/question/add`  // post 问题管理-增加项目问题
 export const  questionUpdate = `api/comu/question/update` // put 问题管理-修改项目问题
@@ -207,6 +207,6 @@ export const questionHandleAdd = id => `api/comu/question/${id}/handle/add` // p
 export const questionHandleUpdata = `api/comu/question/handle/update` // put 问题管理-修改项目问题处理
 export const questionHandleDelete = `api/comu/question/handle/delete`  // delete 问题管理-删除项目问题处理
 export const questionSolve = id => `api/comu/question/${id}/solve` // put 问题管理-解决项目问题
-export const questionSolveAppr = id => `api/comu/question/${id}/solveAppr` //put 问题管理-解决审批项目问
+export const questionSolveAppr = id => `api/comu/question/${id}/solveAppr` //put 问题管理-解决审批项目问题
 export const questionClose = id => `api/comu/question/${id}/close` // put 问题管理-关闭项目问题
 export const questionCloseAppr = id => `api/comu/question/${id}/closeAppr` //put 问题处理-关闭审批项目问题

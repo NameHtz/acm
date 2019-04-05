@@ -47,32 +47,6 @@ export class ComcateProfdback extends Component {
         creator: "WSD",
         creatTime: "2018-9-9",
         status: "1"
-      },
-      {
-        id: 3,
-        title: "项目发布之前相关人士是否通知",
-        questionType: "技术问题",
-        questionPriority: "高",
-        userName: "孙伯域",
-        questionRemark: "在项目编辑页面添加...",
-        questionHandle: "务必在处理之前...",
-        handleTime: "2018-10-29",
-        creator: "WSD",
-        creatTime: "2018-9-9",
-        status: "1"
-      },
-      {
-        id: 4,
-        title: "项目发布之前相关人士是否通知",
-        questionType: "技术问题",
-        questionPriority: "高",
-        userName: "孙伯域",
-        questionRemark: "在项目编辑页面添加...",
-        questionHandle: "务必在处理之前...",
-        handleTime: "2018-10-29",
-        creator: "WSD",
-        creatTime: "2018-9-9",
-        status: "1"
       }],
       activeIndex: "",
       rightData: [],
@@ -177,7 +151,7 @@ export class ComcateProfdback extends Component {
 
   getQuestionList = () => {
     
-    axios.post(questionList(this.state.pageSize,this.state.currentPage),{},true).then((result) => {
+    axios.get(questionList(' ',this.state.pageSize,this.state.currentPage)).then((result) => {
       console.log(result)
     }).catch((err) => {
       console.log(err) 
