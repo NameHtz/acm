@@ -85,6 +85,7 @@ export class PlanDefineTopTags extends Component {
             let that = this
             // 新增
             if (name === 'AddTopBtn') {
+                console.log('新增问题')
                 this.setState({
                     modalVisible: true,
                     modelTitle: '新增项目问题'
@@ -93,11 +94,12 @@ export class PlanDefineTopTags extends Component {
 
             // 删除
             if (name === 'DeleteTopBtn') {
-               
+               console.log('删除')
             }
             //发布
             if (name === 'PublicTopBtn') {
                 // e.key 1发布计划 2发布审批
+                console.log('发布问题')
                 this.setState({
                     publicModalVisible: true,
                     topSelectBtnType: menu.key
@@ -105,12 +107,14 @@ export class PlanDefineTopTags extends Component {
             }
             // 解决
             if (name === 'SolveTopBtn') {
+                console.log('解决问题')
                 this.setState({
                     releaseVisible: true
                 })
             }
             // 关闭
             if (name === 'ClosedTopBtn') {
+                console.log('关闭问题')
                 this.setState({
                     reportedVisible: true
                 })

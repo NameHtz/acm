@@ -98,6 +98,7 @@ export class PlanPreparedRelease extends Component {
     }
 
     handleOk = () => {
+        console.log(this.props.selectType)
         alert(this.props.selectType == 1 ? '发布计划' : '发布审批')
     }
 

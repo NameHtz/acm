@@ -90,63 +90,29 @@ class Add extends Component {
     }
 
     //添加一条项目问题
-
     questionAdd = () => {
-        // axios.post(questionAdd,data,true).then((result) => {
-
-        // }).catch((err) => {
-
-        // });
-
         /**
-         * 
-         * " handleTime": Moment {_isAMomentObject: true, _i: "2018-10-29", _f: "YYYY-MM-DD", _isUTC: false, _pf: {…}, …}
+         " handleTime": Moment {_isAMomentObject: true, _i: "2018-10-29", _f: "YYYY-MM-DD", _isUTC: false, _pf: {…}, …}
          " task": "产品需求设计"
          " userName": "孙伯域"
-          projectname: "ACM产品开发项目"
-          questionPriority: "高"
-          questionRemark: "在项目编辑页面添加..."
-         questionType: "技术问题"
-        questionhandle: "暂无"
-        repGroup: "研发部"
-        title: "项目发布之前相关人士是否通知"
-         */
-
+           projectname: "ACM产品开发项目"
+           questionPriority: "高"
+           questionRemark: "在项目编辑页面添加..."
+           questionType: "技术问题"
+           questionhandle: "暂无"
+           repGroup: "研发部"
+           title: "项目发布之前相关人士是否通知"
+        */
 
         this.props.form.validateFieldsAndScroll((err, values) => {
+            /**
+             * 获取form表单里的数据
+             * valuse
+             * */
 
             let data = {
-                // "taskId": 0,
-                // "handleTime":values.handleTime._i,
-                "title": values.title,
-                "questionType": values.questionType,
-                "questionPriority": values.questionPriority,
-                "org": 0,
-                "userId": 0,
-                "questionRemark": values.questionRemark,
-                "questionHandle": values.questionHandle,
-                "repGroup":values.repGroup,
 
-
-                // title: "项目发布之前相关人士是否通知",
-                // questionType: "技术问题",
-                // questionPriority: "高",
-                // userName: "孙伯域",
-                // repGroup: '研发部',
-                // creatTime: "2019-3-19",
-                // project: 'ACM产品开发项目',
-                // task: '产品需求设计',
-                // questionRemark: "在项目编辑页面添加...",
-                // questionHandle: "务必在处理之前...",
-                // handleTime: "2019-3-19",
-                // creator: "WSD",
-                // status: '新建',
-                // presentDep: '研发部',
-                // additionRequest: '暂无'
             }
-
-
-            console.log(values.handleTime)
             axios.post(questionAdd, data, true).then((result) => {
                 console.log(result)
             }).catch((err) => {

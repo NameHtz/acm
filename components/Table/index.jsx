@@ -77,10 +77,13 @@ class StandardTable extends PureComponent {
 
     let rowSelectionConfig = {};
     if (this.props.rowSelection) {
+      let {onSelect,onSelectAll} = this.props.rowSelection
       rowSelectionConfig = {
         rowSelection: {
           selectedRowKeys,
           onChange: this.handleRowSelectChange,
+          onSelect,
+          onSelectAll,
           getCheckboxProps: record => ({
             disabled: record.disabled,
           }),

@@ -47,7 +47,150 @@ export class ComcateProfdback extends Component {
         creator: "WSD",
         creatTime: "2018-9-9",
         status: "1"
-      }],
+      },
+      {
+        id: 9,
+        title: "项目发布之前相关人士是否通知",
+        questionType: "技术问题",
+        questionPriority: "高",
+        userName: "孙伯域",
+        questionRemark: "在项目编辑页面添加...",
+        questionHandle: "务必在处理之前...",
+        handleTime: "2018-10-29",
+        creator: "WSD",
+        creatTime: "2018-9-9",
+        status: "1"
+      },
+      {
+        id: 8,
+        title: "项目发布之前相关人士是否通知",
+        questionType: "技术问题",
+        questionPriority: "高",
+        userName: "孙伯域",
+        questionRemark: "在项目编辑页面添加...",
+        questionHandle: "务必在处理之前...",
+        handleTime: "2018-10-29",
+        creator: "WSD",
+        creatTime: "2018-9-9",
+        status: "1"
+      },
+      {
+        id: 7,
+        title: "项目发布之前相关人士是否通知",
+        questionType: "技术问题",
+        questionPriority: "高",
+        userName: "孙伯域",
+        questionRemark: "在项目编辑页面添加...",
+        questionHandle: "务必在处理之前...",
+        handleTime: "2018-10-29",
+        creator: "WSD",
+        creatTime: "2018-9-9",
+        status: "1"
+      },
+      // {
+      //   id: 6,
+      //   title: "项目发布之前相关人士是否通知",
+      //   questionType: "技术问题",
+      //   questionPriority: "高",
+      //   userName: "孙伯域",
+      //   questionRemark: "在项目编辑页面添加...",
+      //   questionHandle: "务必在处理之前...",
+      //   handleTime: "2018-10-29",
+      //   creator: "WSD",
+      //   creatTime: "2018-9-9",
+      //   status: "1"
+      // },
+      // {
+      //   id: 5,
+      //   title: "项目发布之前相关人士是否通知",
+      //   questionType: "技术问题",
+      //   questionPriority: "高",
+      //   userName: "孙伯域",
+      //   questionRemark: "在项目编辑页面添加...",
+      //   questionHandle: "务必在处理之前...",
+      //   handleTime: "2018-10-29",
+      //   creator: "WSD",
+      //   creatTime: "2018-9-9",
+      //   status: "1"
+      // },
+      // {
+      //   id: 4,
+      //   title: "项目发布之前相关人士是否通知",
+      //   questionType: "技术问题",
+      //   questionPriority: "高",
+      //   userName: "孙伯域",
+      //   questionRemark: "在项目编辑页面添加...",
+      //   questionHandle: "务必在处理之前...",
+      //   handleTime: "2018-10-29",
+      //   creator: "WSD",
+      //   creatTime: "2018-9-9",
+      //   status: "1"
+      // },
+      // {
+      //   id: 3,
+      //   title: "项目发布之前相关人士是否通知",
+      //   questionType: "技术问题",
+      //   questionPriority: "高",
+      //   userName: "孙伯域",
+      //   questionRemark: "在项目编辑页面添加...",
+      //   questionHandle: "务必在处理之前...",
+      //   handleTime: "2018-10-29",
+      //   creator: "WSD",
+      //   creatTime: "2018-9-9",
+      //   status: "1"
+      // },
+      // {
+      //   id: 2,
+      //   title: "项目发布之前相关人士是否通知",
+      //   questionType: "技术问题",
+      //   questionPriority: "高",
+      //   userName: "孙伯域",
+      //   questionRemark: "在项目编辑页面添加...",
+      //   questionHandle: "务必在处理之前...",
+      //   handleTime: "2018-10-29",
+      //   creator: "WSD",
+      //   creatTime: "2018-9-9",
+      //   status: "1"
+      // },
+      // {
+      //   id: 10,
+      //   title: "项目发布之前相关人士是否通知",
+      //   questionType: "技术问题",
+      //   questionPriority: "高",
+      //   userName: "孙伯域",
+      //   questionRemark: "在项目编辑页面添加...",
+      //   questionHandle: "务必在处理之前...",
+      //   handleTime: "2018-10-29",
+      //   creator: "WSD",
+      //   creatTime: "2018-9-9",
+      //   status: "1"
+      // },
+      // {
+      //   id: 11,
+      //   title: "项目发布之前相关人士是否通知",
+      //   questionType: "技术问题",
+      //   questionPriority: "高",
+      //   userName: "孙伯域",
+      //   questionRemark: "在项目编辑页面添加...",
+      //   questionHandle: "务必在处理之前...",
+      //   handleTime: "2018-10-29",
+      //   creator: "WSD",
+      //   creatTime: "2018-9-9",
+      //   status: "1"
+      // },{
+      //   id: 12,
+      //   title: "项目发布之前相关人士是否通知",
+      //   questionType: "技术问题",
+      //   questionPriority: "高",
+      //   userName: "孙伯域",
+      //   questionRemark: "在项目编辑页面添加...",
+      //   questionHandle: "务必在处理之前...",
+      //   handleTime: "2018-10-29",
+      //   creator: "WSD",
+      //   creatTime: "2018-9-9",
+      //   status: "1"
+      // }
+    ],
       activeIndex: "",
       rightData: [],
       rightTags: [
@@ -75,6 +218,8 @@ export class ComcateProfdback extends Component {
 
   componentDidMount() {
     this.loadLocales();
+
+    //初始化问题列表数据
     this.getQuestionList()
   }
 
@@ -148,11 +293,15 @@ export class ComcateProfdback extends Component {
   }
 
   //获取 获取问题列表
-
   getQuestionList = () => {
     
     axios.get(questionList(' ',this.state.pageSize,this.state.currentPage)).then((result) => {
-      console.log(result)
+
+      this.setState({
+        // 获取问题列表
+        // data:result.data.data,
+      })
+
     }).catch((err) => {
       console.log(err) 
     });
@@ -161,7 +310,6 @@ export class ComcateProfdback extends Component {
   
 
   getInfo = (record, index) => {
-
 
     let id = record.id, records = record
     /* *********** 点击表格row执行更新state start ************* */
@@ -227,8 +375,10 @@ export class ComcateProfdback extends Component {
       onChange: (page, pageSize) => {
         
         this.setState({
-          currentPage: page
+          currentPage: page,
+          pageSize
         })
+        
       }
     }
     return (
