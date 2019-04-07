@@ -94,7 +94,7 @@ export class PlanDefineTopTags extends Component {
 
             // 删除
             if (name === 'DeleteTopBtn') {
-               console.log('删除')
+               this.props.deleteQuestion()
             }
             //发布
             if (name === 'PublicTopBtn') {

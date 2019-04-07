@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic'
 import _ from "lodash";
 import StandardTable from '../../../components/Table/index';
 
-import {questionList} from '../../../api/api'
+import {questionList,questionDelete} from '../../../api/api'
 import axios from '../../../api/axios'
 
 /* *********** 引入redux及redux方法 start ************* */
@@ -199,7 +199,7 @@ export class ComcateProfdback extends Component {
         { icon: 'iconjilu', title: '处理记录', fielUrl: 'Comcate/Profdback/ProfdBackInfo' },
         { icon: 'iconliuchengxinxi', title: '流程信息', fielUrl: 'Plot/Approval/Process' },
       ],
-
+      deleteQuestionIdList:'',
     }
 
     /* *********** 添加监听redux中store变化 start ************* */
@@ -307,6 +307,21 @@ export class ComcateProfdback extends Component {
     });
   }
 
+  /**
+   * 删除问题
+   */
+  deleteQuestion = ()=>{
+
+    //要删除的问题id
+    let params = this.state.deleteQuestionIdList;
+    axios.deleted(questionDelete,params,false).then((result) => {
+      message.success('This is a normal message');
+      console.log(resule)
+    }).catch((err) => {
+      message.error('This is a normal message');
+      console.log(err)
+    });
+  }
   
 
   getInfo = (record, index) => {
@@ -352,10 +367,20 @@ export class ComcateProfdback extends Component {
         console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
       },
       onSelect: (record, selected, selectedRows) => {
-        console.log(record, selected, selectedRows);
+        // console.log(record, selected, selectedRows);
+        this.setState({
+          deleteQuestionIdList:selectedRows.map(item=>{
+            return item.id;
+          })
+        })
       },
       onSelectAll: (selected, selectedRows, changeRows) => {
-        console.log(selected, selectedRows, changeRows);
+        // console.log(selected,selectedRows,changeRows)
+        this.setState({
+          deleteQuestionIdList:selectedRows.map(item=>{
+            return item.id
+          })
+        })
       },
     };
     const ApplyModal = dynamic(
@@ -378,12 +403,12 @@ export class ComcateProfdback extends Component {
           currentPage: page,
           pageSize
         })
-        
+
       }
     }
     return (
       <div>
-        <TopTags />
+        <TopTags  deleteQuestion={this.deleteQuestion}/>
         <div className={style.main}>
           <div className={style.leftMain} style={{ height: this.props.height }}>
             <div style={{ minWidth: 'calc(100vw - 60px)' }}>
