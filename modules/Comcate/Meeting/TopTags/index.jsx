@@ -13,7 +13,7 @@ import Search from '../../../../components/public/Search'
 import style from './style.less'
 import Add from '../Add'
 
-import {meetingActionDelete} from '../../../../api/api';
+import { meetingActionDelete } from '../../../../api/api';
 import axios from '../../../../api/api'
 
 
@@ -24,7 +24,7 @@ export class PlanDefineTopTags extends Component {
         super(props)
         this.state = {
             modalVisible: false,
-            modelTitle:'',
+            modelTitle: '',
             roleBtnData: [
                 {
                     id: 1,
@@ -41,7 +41,7 @@ export class PlanDefineTopTags extends Component {
                     name: 'DeleteTopBtn',
                     aliasName: '删除'
                 },
-                
+
 
             ],
             planDefineSelectData: []
@@ -67,7 +67,7 @@ export class PlanDefineTopTags extends Component {
 
         }
 
-        axios.deleted(meetingActionDelete,body).then((result) => {
+        axios.deleted(meetingActionDelete, body).then((result) => {
             console.log(result)
         }).catch((err) => {
             console.log(err)
@@ -81,31 +81,31 @@ export class PlanDefineTopTags extends Component {
         })
 
         // 显示表单弹窗
-        let showFormModal = (name,e) => {
+        let showFormModal = (name, e) => {
             console.log(name);
             let that = this
             // 新增
-            if(name === 'AddTopBtn') {
+            if (name === 'AddTopBtn') {
                 this.setState({
                     modalVisible: true,
-                    modelTitle:'新增项目会议'
+                    modelTitle: '新增项目会议'
                 })
                 return
             }
-           //发布
-           if (name === 'PublicTopBtn') {
-            // e.key 1发布计划 2发布审批
-            this.setState({
-                publicModalVisible: true,
-                topSelectBtnType: e.key
-            })
-        }
+            //发布
+            if (name === 'PublicTopBtn') {
+                // e.key 1发布计划 2发布审批
+                this.setState({
+                    publicModalVisible: true,
+                    topSelectBtnType: e.key
+                })
+            }
             // 删除
-            if(name === 'DeleteTopBtn') {
-                 
+            if (name === 'DeleteTopBtn') {
+
                 return
             }
-            
+
         }
 
         return (
@@ -121,7 +121,7 @@ export class PlanDefineTopTags extends Component {
                     }
                 </div>
                 <Public selectType={this.state.topSelectBtnType} modalVisible={this.state.publicModalVisible} handleCancel={this.handlePublicCancel} />
-              <Add modalVisible={this.state.modalVisible} handleCancel={this.handleCancel} modelTitle={this.state.modelTitle}/>
+                <Add modalVisible={this.state.modalVisible} handleCancel={this.handleCancel} modelTitle={this.state.modelTitle} />
 
             </div>
 
