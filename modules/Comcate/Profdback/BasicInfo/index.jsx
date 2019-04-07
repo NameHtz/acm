@@ -4,6 +4,9 @@ import intl from 'react-intl-universal'
 import style from './index.less'
 import PlanTaskModal from "../PlanTaskModal"
 
+import {questionInfo} from '../../../../api/api'
+import axios from '../../../../api/axios'
+
 const FormItem = Form.Item
 const { TextArea } = Input
 const locales = {
@@ -39,6 +42,7 @@ export default class BasicInfo extends Component {
     componentDidMount() {
         this.loadLocales();
         console.log('加载')
+        this.getQuestionInfo()
         this.setState({
             width: this.props.width
         })
@@ -59,8 +63,15 @@ export default class BasicInfo extends Component {
         e.preventDefault();
 
         this.props.form.validateFieldsAndScroll((err, values) => {
+            console.log(values)
             if (!err) {
                 console.log('Received values of form: ', values);
+                // axios.put().then((result) => {
+                    
+                // }).catch((err) => {
+                    
+                // });
+                console.log(values)
             }
         });
     }
@@ -92,6 +103,31 @@ closeTaskModal=()=>{
         isShowTaskmodal:false
     })
 }
+
+// 获取到当前点击的一条问题的数据
+getQuestionInfo=()=>{
+    // axios.get(questionInfo()).then((result) => {
+    //     this.setState({
+    //         data:result.data.data,
+    //     })
+    // }).catch((err) => {
+        
+    // });
+
+     let {data} = this.props
+
+     if(data.length !== 0){
+         this.setState({
+             data,
+         },()=>{
+             console.log(this.state.data)
+         })
+     }
+
+}
+
+
+
     render() {
         const { form } = this.props
         const formItemLayout = {

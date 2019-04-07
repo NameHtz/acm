@@ -7,6 +7,8 @@ import moment from 'moment';
 import Distribute from '../Distribute'
 import '../../../../asserts/antd-custom.less'
 
+import {questionHandleList} from '../../../../api/api'
+
 const Option = Select.Option;
 const Step = Steps.Step;
 const { TextArea } = Input;
@@ -45,15 +47,26 @@ export class PlanPreparedRelease extends Component {
                         },
                         {
                             id: 3,
-                            name: 'ACM产品开发计划1-2',
-                            code: 'XM3',
+                            name: 'ACM产品开发计划1-1',
+                            code: 'XM2',
                             planStartTime: '2018-08-10',
                             planEndTime: '2018-08-10',
                             iptName: '研发部',
                             userName: '孙博宇',
-                        }
+                        },
+                        {
+                            id: 4,
+                            name: 'ACM产品开发计划1-1',
+                            code: 'XM2',
+                            planStartTime: '2018-08-10',
+                            planEndTime: '2018-08-10',
+                            iptName: '研发部',
+                            userName: '孙博宇',
+                        },
                     ]
-                }
+                },
+               
+                
             ],
             info: {
                 receiver: '巫启贤、赵帅、徐文豪',
@@ -131,6 +144,8 @@ export class PlanPreparedRelease extends Component {
         }))
     }
 
+    //获取问题处理列表
+
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
         const formItemLayout = {
@@ -151,6 +166,7 @@ export class PlanPreparedRelease extends Component {
                 this.setState({
                     selectData: selectedRows
                 })
+                console.log(selectedRows)
             },
             onSelectAll: (selected, selectedRows, changeRows) => {
                 console.log(selected, selectedRows, changeRows);
@@ -189,7 +205,7 @@ export class PlanPreparedRelease extends Component {
                     <Distribute />
                     <div style={{ marginTop: '15px' }}>
                         <span>处理意见：</span> <br />
-                        <TextArea defaultValue="11.25前完成" />
+                        <TextArea defaultValue=""  placeholder="请输入处理意见"/>
                     </div>
                 </div>)
                 }
