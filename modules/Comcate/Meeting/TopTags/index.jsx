@@ -13,6 +13,10 @@ import Search from '../../../../components/public/Search'
 import style from './style.less'
 import Add from '../Add'
 
+import {meetingActionDelete} from '../../../../api/api';
+import axios from '../../../../api/api'
+
+
 const confirm = Modal.confirm
 
 export class PlanDefineTopTags extends Component {
@@ -56,6 +60,21 @@ export class PlanDefineTopTags extends Component {
             publicModalVisible: false
         })
     }
+
+    //删除
+    deleteMeetingAction = () => {
+        let body = {
+
+        }
+
+        axios.deleted(meetingActionDelete,body).then((result) => {
+            console.log(result)
+        }).catch((err) => {
+            console.log(err)
+        });
+    }
+
+
     render() {
         let topTags = this.state.roleBtnData.map((v, i) => {
             return dynamic(import('../../../../components/public/TopTags/' + v.name))
@@ -83,7 +102,7 @@ export class PlanDefineTopTags extends Component {
         }
             // 删除
             if(name === 'DeleteTopBtn') {
-               
+                 
                 return
             }
             

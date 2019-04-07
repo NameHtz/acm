@@ -16,7 +16,7 @@ class AddMeet extends Component {
         this.state = {
             initDone: false,
             info: {
-                title: 1,
+                title: 2,
                 meetingType: 1,
                 projectName: 1,
                 meetingAddress: 1,

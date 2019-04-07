@@ -6,8 +6,9 @@ import TopTags from './TopTags/index'
 import RightTags from '../../../components/public/RightTags/index'
 import _ from "lodash";
 
-import {meetingList} from '../../../api/api'
+import {meetingList, meetingAdd} from '../../../api/api'
 import axios from '../../../api/axios'
+
 
 /* *********** 引入redux及redux方法 start ************* */
 import { connect } from 'react-redux'
@@ -28,6 +29,8 @@ export class ComcateMeeting extends Component {
             initDone: false,
             columns: [],
             date: new Date(),
+            currentPage: 1,
+            pageSize: 10,
             data: [{
                 id: 1,
                 title: "会议会议",
@@ -168,10 +171,26 @@ export class ComcateMeeting extends Component {
     };
 
     // 获取会议管理列表
-    // getMeetingList = ()=>{
-    //     axios.get(meetingList(' ', ))
-    // }
+    getMeetingList = ()=>{
+        axios.get(meetingList('', this.state.pageSize,this.state.currentPage)).then((result) => {
+            console.log(result)
+            this.setState({
+                data:result.data
+            })
+        }).catch((err) => {
+            console.log(err)
+        });
+    }
 
+    // 新增会议
+    postMeetingAdd = ()=>{
+        let body = {}
+        axios.post(meetingAdd('',body)).then((result) => {
+            console.log(result)
+        }).catch((err) => {
+            console.log(err)
+        });
+    }
 
     render() {
         const rowSelection = {

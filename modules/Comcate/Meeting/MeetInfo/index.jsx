@@ -3,6 +3,10 @@ import style from './style.less'
 import {Form, Row, Col, Input, Button, Icon, Select, DatePicker} from 'antd';
 import intl from 'react-intl-universal'
 import moment from 'moment';
+
+import {} from '../../../../api/api'
+import axios from '../../../../api/api'
+
 const locales = {
     "en-US": require('../../../../api/language/en-US.json'),
     "zh-CN": require('../../../../api/language/zh-CN.json')
@@ -58,6 +62,29 @@ class ComcateMeetingInfo extends Component {
         });
     }
 
+    // 会议基本信息
+    getMeetingInfo = () => {
+        axios.get(meetingInfo()).then((result) => {
+            console.log(result)
+            this.setState({
+                info:result.data
+            })
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+    //更新会议基本信息
+    putMeetingUpdate = () => {
+        let data = {
+
+        }
+        axios.put(meetingUpdate,data).then((result) => {
+            console.log(result)
+        }).catch((err) => {
+            console.log(err)
+        });
+    }
     render() {
         const {
           getFieldDecorator, getFieldsError, getFieldError, isFieldTouched,
