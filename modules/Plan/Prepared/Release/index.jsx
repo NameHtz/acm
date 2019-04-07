@@ -7,7 +7,8 @@ import moment from 'moment';
 import Distribute from '../Distribute'
 import '../../../../asserts/antd-custom.less'
 
-import {questionHandleList} from '../../../../api/api'
+import { questionHandleList } from '../../../../api/api'
+import axios from '../../../../api/axios'
 
 const Option = Select.Option;
 const Step = Steps.Step;
@@ -65,8 +66,8 @@ export class PlanPreparedRelease extends Component {
                         },
                     ]
                 },
-               
-                
+
+
             ],
             info: {
                 receiver: '巫启贤、赵帅、徐文豪',
@@ -78,6 +79,8 @@ export class PlanPreparedRelease extends Component {
 
     componentDidMount() {
         this.loadLocales()
+        // 获取问题列表
+        this.getQuestionHandleList()
     }
 
     loadLocales() {
@@ -145,7 +148,13 @@ export class PlanPreparedRelease extends Component {
     }
 
     //获取问题处理列表
+    getQuestionHandleList = () => {
+        axios.post(questionHandleList('', 1, 10)).then((result) => {
+            console.log(resule)
+        }).catch((err) => {
 
+        });
+    }
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
         const formItemLayout = {
@@ -205,7 +214,7 @@ export class PlanPreparedRelease extends Component {
                     <Distribute />
                     <div style={{ marginTop: '15px' }}>
                         <span>处理意见：</span> <br />
-                        <TextArea defaultValue=""  placeholder="请输入处理意见"/>
+                        <TextArea defaultValue="" placeholder="请输入处理意见" />
                     </div>
                 </div>)
                 }

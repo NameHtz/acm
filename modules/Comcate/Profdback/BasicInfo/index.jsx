@@ -40,7 +40,7 @@ export default class BasicInfo extends Component {
         }
     }
     componentDidMount() {
-        
+
         this.loadLocales();
         
         this.getQuestionInfo()
@@ -73,7 +73,6 @@ export default class BasicInfo extends Component {
                 // }).catch((err) => {
                     
                 // });
-                console.log(values)
             }
         });
     }

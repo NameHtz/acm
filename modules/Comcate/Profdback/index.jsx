@@ -192,8 +192,9 @@ export class ComcateProfdback extends Component {
   //获取 获取问题列表
   getQuestionList = () => {
     
-    axios.get(questionList(' ',this.state.pageSize,this.state.currentPage)).then((result) => {
-
+    axios.get(questionList(' ',{pageSize:this.state.pageSize,currentPageNum:this.state.currentPage})).then((result) => {
+      
+      
       this.setState({
         // 获取问题列表
         // data:result.data.data,

@@ -7,6 +7,10 @@ import moment from 'moment';
 import Distribute from '../Distribute'
 import '../../../../asserts/antd-custom.less'
 
+import { questionHandleList, questionClose} from '../../../../api/api'
+import axios from '../../../../api/axios'
+
+
 const Option = Select.Option;
 const Step = Steps.Step;
 const { TextArea } = Input;
@@ -22,7 +26,7 @@ export class PlanPreparedRelease extends Component {
         super(props)
         this.state = {
             initDone: false,
-            step:1,
+            step: 1,
             columns: [],
             data: [
                 {
@@ -110,12 +114,33 @@ export class PlanPreparedRelease extends Component {
         });
     }
 
+
+    //获取问题处理列表
+    getQuestionHandleList = () => {
+        axios.post(questionHandleList('', 1, 10)).then((result) => {
+            this.setState({
+                data: result.data
+            })
+        }).catch((err) => {
+
+        });
+    }
+
+    // 关闭项目问题
+    putQuestionClose = () => {
+        // 问题ID
+        axios.put(questionClose(id)).then((result) => {
+            
+        }).catch((err) => {
+            
+        });
+    }
     handleSubmit = (e) => {
         e.preventDefault();
         this.setState((proState, state) => ({
             step: proState.step + 1
         }), () => {
-            if(this.state.step == 3) {
+            if (this.state.step == 3) {
                 this.props.handleCancel()
                 this.setState({
                     step: 1
@@ -124,7 +149,7 @@ export class PlanPreparedRelease extends Component {
         })
     }
 
-    backone  = (e) => {
+    backone = (e) => {
         e.preventDefault();
         this.setState((proState, state) => ({
             step: proState.step - 1
@@ -187,7 +212,7 @@ export class PlanPreparedRelease extends Component {
                         <Search />
                     </div>
                     <Distribute />
-                    <div style={{marginTop: '15px'}}>
+                    <div style={{ marginTop: '15px' }}>
                         <span>处理意见：</span> <br />
                         <TextArea defaultValue="11.25前完成" />
                     </div>
