@@ -40,8 +40,9 @@ export default class BasicInfo extends Component {
         }
     }
     componentDidMount() {
+        
         this.loadLocales();
-        console.log('加载')
+        
         this.getQuestionInfo()
         this.setState({
             width: this.props.width
@@ -59,6 +60,7 @@ export default class BasicInfo extends Component {
             });
     }
 
+    //
     handleSubmit = (e) => {
         e.preventDefault();
 
