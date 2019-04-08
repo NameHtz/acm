@@ -46,7 +46,7 @@ class Add extends Component {
         this.setState({
             width: this.props.width
         })
-        console.log(this.props.modelTitle)
+        
     }
     //打开计划任务
     OpenTaskModal = () => {

@@ -120,8 +120,6 @@ getQuestionInfo=()=>{
      if(data.length !== 0){
          this.setState({
              data,
-         },()=>{
-             console.log(this.state.data)
          })
      }
 
@@ -286,7 +284,7 @@ getQuestionInfo=()=>{
                                         </Col>
                                     </Row>
                                     <Row >
-                                        <Col span={11}>
+                                        {/* <Col span={11}>
                                             <FormItem label={intl.get("wsd.i18n.plan.projectquestion.applyipt")} {...formItemLayout}>
                                                 {getFieldDecorator('applyipt', {
                                                     initialValue: data.presentDep,
@@ -294,7 +292,7 @@ getQuestionInfo=()=>{
                                                     <Input disabled={true} />
                                                 )}
                                             </FormItem>
-                                        </Col>
+                                        </Col> */}
                                         <Col span={11}>
                                             <FormItem label={intl.get('wsd.i18n.comu.question.creattime')} {...formItemLayout}>
                                                 {getFieldDecorator('creatTime', {
