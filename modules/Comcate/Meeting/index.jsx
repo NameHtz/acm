@@ -83,6 +83,7 @@ export class ComcateMeeting extends Component {
     }
     componentDidMount() {
         this.loadLocales();
+        this.getMeetingList()
     }
     loadLocales() {
         intl.init({
@@ -172,10 +173,10 @@ export class ComcateMeeting extends Component {
 
     // 获取会议管理列表
     getMeetingList = ()=>{
-        axios.get(meetingList('', this.state.pageSize,this.state.currentPage)).then((result) => {
-            console.log(result)
+        axios.get(meetingList(' ', this.state.pageSize,this.state.currentPage)).then((result) => {
+            console.log(result,'----------')
             this.setState({
-                data:result.data
+                // data:result.data
             })
         }).catch((err) => {
             console.log(err)

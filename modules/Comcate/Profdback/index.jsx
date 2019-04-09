@@ -193,7 +193,7 @@ export class ComcateProfdback extends Component {
   getQuestionList = () => {
     
     axios.get(questionList(' ',this.state.pageSize,this.state.currentPage)).then((result) => {
-      
+      console.log(result)
       // 获取到的列表数据
       this.setState({
         // 获取问题列表
@@ -201,7 +201,7 @@ export class ComcateProfdback extends Component {
       })
 
     }).catch((err) => {
-      console.log(err) 
+      console.log(err,'问题列表') 
     });
   }
 
