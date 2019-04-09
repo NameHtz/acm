@@ -21,22 +21,22 @@ class Add extends Component {
             initDone: false,
             title: '基本信息',
             data: {
-                key: "1",
-                title: "项目发布之前相关人士是否通知",
-                questionType: "技术问题",
-                questionPriority: "高",
-                userName: "孙伯域",
-                repGroup: '研发部',
-                creatTime: "2019-3-19",
-                project: 'ACM产品开发项目',
-                task: '产品需求设计',
-                questionRemark: "在项目编辑页面添加...",
-                questionHandle: "务必在处理之前...",
-                handleTime: "2019-3-19",
-                creator: "WSD",
-                status: '新建',
-                presentDep: '研发部',
-                additionRequest: '暂无'
+                // key: "1",
+                // title: "项目发布之前相关人士是否通知",
+                // questionType: "技术问题",
+                // questionPriority: "高",
+                // userName: "孙伯域",
+                // repGroup: '研发部',
+                // creatTime: "2019-3-19",
+                // project: 'ACM产品开发项目',
+                // task: '产品需求设计',
+                // questionRemark: "在项目编辑页面添加...",
+                // questionHandle: "务必在处理之前...",
+                // handleTime: "2019-3-19",
+                // creator: "WSD",
+                // status: '新建',
+                // presentDep: '研发部',
+                // additionRequest: '暂无'
             }
         }
     }
@@ -82,9 +82,6 @@ class Add extends Component {
     // }
     handleSubmit = (e) => {
         //调用子组件的自定义方法getItemsValue
-
-
-        this.props.handleCancel();
         this.questionAdd()
 
     }
@@ -116,14 +113,20 @@ class Add extends Component {
                 "orgId": 0,
                 "userId": 0,
                 "priority": "string",
-                "handleTime": "2019-03-28",
+                "handleTime": "2019-03-27",
                 "projectId": 0,
-                "taskId": 0,
+                "taskId": 1,
                 "remark": "string",
                 "handle": "string"
               }
+
+              console.log(questionAdd,'--------')
             axios.post(questionAdd, data, true).then((result) => {
+
                 console.log(result)
+                
+             // this.props.handleCancel();
+
             }).catch((err) => {
                 console.log(err)
             });

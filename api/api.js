@@ -187,7 +187,7 @@ export const meetingRelease = id => `api/comu/meeting/${id}/release`   // put �
 export const releaseApproval = id => `api/comu/meeting/${id}/release/approval` // put 沟通管理-发布审批会议
 export const meetingCancel = id => `api/comu/meeting/${id}/cancel`  // put 沟通管理-取消发布会议
 export const meetingDelete = `api/comu/meeting/delete`  // delete 沟通管理-删除会议信息
-export const meetingAdd = id => `api/comu/meeting/${id}/add` // post 沟通管理-新增会议
+export const meetingAdd = `api/comu/meeting/add` // post 沟通管理-新增会议
 export const meetingInfo = id => `api/comu/meeting/${id}/info` // get 沟通管理-会议基本信息
 export const meetingUpdate = `api/comu/meeting/update` //put 沟通管理-更新会议基本信息
 export const getMeetingActionList = (id,pageSize,currentPageNum) => `api/comu/meeting/${id}/action/list/${pageSize}/${currentPageNum}` //get 沟通管理-获取会议行动列表

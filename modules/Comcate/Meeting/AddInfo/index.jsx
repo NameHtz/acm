@@ -3,6 +3,9 @@ import style from './style.less'
 import { Form, Row, Col, Input, Button, Icon, Select, DatePicker } from 'antd';
 import intl from 'react-intl-universal'
 import moment from 'moment'
+import {meetingAdd} from '../../../../api/api'
+import axios from '../../../../api/axios'
+
 const locales = {
     "en-US": require('../../../../api/language/en-US.json'),
     "zh-CN": require('../../../../api/language/zh-CN.json')
@@ -50,8 +53,9 @@ class AddMeet extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        alert(1)
+
         this.props.form.validateFieldsAndScroll((err, values) => {
+            console.log(values)
             if (!err) {
                 console.log('Received values of form: ', values);
             }

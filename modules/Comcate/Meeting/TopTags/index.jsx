@@ -54,6 +54,7 @@ export class PlanDefineTopTags extends Component {
         this.setState({
             modalVisible: false
         })
+        
     }
     handlePublicCancel = () => {
         this.setState({
@@ -121,6 +122,7 @@ export class PlanDefineTopTags extends Component {
                     }
                 </div>
                 <Public selectType={this.state.topSelectBtnType} modalVisible={this.state.publicModalVisible} handleCancel={this.handlePublicCancel} />
+
                 <Add modalVisible={this.state.modalVisible} handleCancel={this.handleCancel} modelTitle={this.state.modelTitle} />
 
             </div>
