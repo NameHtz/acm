@@ -174,10 +174,12 @@ export class ComcateMeeting extends Component {
     // 获取会议管理列表
     getMeetingList = ()=>{
         axios.get(meetingList(' ', this.state.pageSize,this.state.currentPage)).then((result) => {
-            console.log(result,'----------')
-            this.setState({
-                // data:result.data
-            })
+           
+            if(result.data.data.length != 0){
+                this.setState({
+                    data:result.data
+                })
+            }
         }).catch((err) => {
             console.log(err)
         });

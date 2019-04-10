@@ -5,7 +5,7 @@ import { Modal, Button, Form, Row, Col, Input, Icon, Select, DatePicker } from '
 import intl from 'react-intl-universal'
 import PlanTaskModal from "../PlanTaskModal"
 
-import { questionAdd, getUserInfoById } from '../../../../api/api'
+import { questionAdd, getUserInfoById, orgTree } from '../../../../api/api'
 import axios from '../../../../api/axios'
 
 const locales = {
@@ -42,7 +42,7 @@ class Add extends Component {
     }
     componentDidMount() {
         this.loadLocales();
-        console.log('加载')
+        this.getOrgTree();
         this.setState({
             width: this.props.width
         })
@@ -108,31 +108,38 @@ class Add extends Component {
              * */
 
             let data = {
-                "title": "string",
-                "type": "string",
-                "orgId": 0,
+                "title": values.title,
+                "type": values.questionType,
+                "orgid": values.repGroup,
                 "userId": 0,
-                "priority": "string",
+                "priority": values.questionPriority,
                 "handleTime": "2019-03-27",
-                "projectId": 0,
+                // "projectId": 0,
                 "taskId": 1,
-                "remark": "string",
-                "handle": "string"
+                "remark": values.questionRemark,
+                "handle": values.questionhandle
               }
 
-              console.log(questionAdd,'--------')
-            axios.post(questionAdd, data, true).then((result) => {
+              console.log(values)
+            // axios.post(questionAdd, data, true).then((result) => {
 
-                console.log(result)
+            //     console.log(result)
                 
-             // this.props.handleCancel();
+            //  // this.props.handleCancel();
 
-            }).catch((err) => {
-                console.log(err)
-            });
+            // }).catch((err) => {
+            //     console.log(err)
+            // });
         })
     }
-
+    // 获取责任主题
+    getOrgTree = () => {
+        // axios.get(orgTree,'').then((result) => {
+        //     console.log(result)
+        // }).catch((err) => {
+        //     console.log(err)
+        // });
+    }
 
 
     render() {

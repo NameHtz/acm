@@ -80,6 +80,7 @@ export class PlanPreparedRelease extends Component {
     componentDidMount() {
         this.loadLocales()
         // 获取问题列表
+        console.log('wenti----')
         this.getQuestionHandleList()
     }
 
@@ -149,11 +150,11 @@ export class PlanPreparedRelease extends Component {
 
     //获取问题处理列表
     getQuestionHandleList = () => {
-        axios.post(questionHandleList('', 1, 10)).then((result) => {
-            console.log(resule)
-        }).catch((err) => {
+        // axios.get(questionHandleList('', 1, 10)).then((result) => {
+        //     console.log(resule)
+        // }).catch((err) => {
 
-        });
+        // });
     }
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;

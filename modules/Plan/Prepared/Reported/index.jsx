@@ -117,13 +117,13 @@ export class PlanPreparedRelease extends Component {
 
     //获取问题处理列表
     getQuestionHandleList = () => {
-        axios.post(questionHandleList('', 1, 10)).then((result) => {
-            this.setState({
-                data: result.data
-            })
-        }).catch((err) => {
+        // axios.post(questionHandleList('', 1, 10)).then((result) => {
+        //     this.setState({
+        //         data: result.data
+        //     })
+        // }).catch((err) => {
 
-        });
+        // });
     }
 
     // 关闭项目问题

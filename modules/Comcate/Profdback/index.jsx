@@ -47,45 +47,6 @@ export class ComcateProfdback extends Component {
         creator: "WSD",
         creatTime: "2018-9-9",
         status: "1"
-      },
-      {
-        id: 9,
-        title: "项目发布之前相关人士是否通知",
-        questionType: "技术问题",
-        questionPriority: "高",
-        userName: "孙伯域1",
-        questionRemark: "在项目编辑页面添加...",
-        questionHandle: "务必在处理之前...",
-        handleTime: "2018-10-29",
-        creator: "WSD",
-        creatTime: "2018-9-9",
-        status: "1"
-      },
-      {
-        id: 8,
-        title: "项目发布之前相关人士是否通知",
-        questionType: "技术问题",
-        questionPriority: "高",
-        userName: "孙伯域2",
-        questionRemark: "在项目编辑页面添加...",
-        questionHandle: "务必在处理之前...",
-        handleTime: "2018-10-29",
-        creator: "WSD",
-        creatTime: "2018-9-9",
-        status: "1"
-      },
-      {
-        id: 7,
-        title: "项目发布之前相关人士是否通知",
-        questionType: "技术问题",
-        questionPriority: "高",
-        userName: "孙伯域3",
-        questionRemark: "在项目编辑页面添加...",
-        questionHandle: "务必在处理之前...",
-        handleTime: "2018-10-29",
-        creator: "WSD",
-        creatTime: "2018-9-9",
-        status: "1"
       }
     ],
       activeIndex: "",
@@ -192,24 +153,23 @@ export class ComcateProfdback extends Component {
   //获取 获取问题列表
   getQuestionList = () => {
     
-    axios.get(questionList(' ',this.state.pageSize,this.state.currentPage)).then((result) => {
-      console.log(result)
-      // 获取到的列表数据
-      this.setState({
-        // 获取问题列表
-        // data:result.data.data,
-      })
+    // axios.get(questionList(' ',this.state.pageSize,this.state.currentPage)).then((result) => {
+    //   console.log(result)
+    //   // 获取到的列表数据
+    //   this.setState({
+    //     // 获取问题列表
+    //     // data:result.data.data,
+    //   })
 
-    }).catch((err) => {
-      console.log(err,'问题列表') 
-    });
+    // }).catch((err) => {
+    //   console.log(err) 
+    // });
   }
 
   /**
    * 删除问题
    */
   deleteQuestion = ()=>{
-
     //要删除的问题id
     let params = this.state.deleteQuestionIdList;
     axios.deleted(questionDelete,params,false).then((result) => {

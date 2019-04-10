@@ -4,6 +4,8 @@ import { Modal, Table ,Button} from 'antd';
 import intl from 'react-intl-universal'
 import Search from '../../../../components/public/Search'
 
+import { orgSelectTree } from '../../../../api/api'
+import axios from '../../../../api/axios'
 
 const locales = {
     "en-US": require('../../../../api/language/en-US.json'),
@@ -52,6 +54,9 @@ export class PlanPreparedRelease extends Component {
 
     componentDidMount() {
         this.loadLocales()
+
+        //获取审批列表
+        this.getOrgSelectTree()
     }
 
     loadLocales() {
@@ -99,6 +104,21 @@ export class PlanPreparedRelease extends Component {
 
     handleOk = () => {
         alert(this.props.selectType == 1 ? '发布计划' : '发布审批')
+    }
+
+    getOrgSelectTree = () => {
+
+        axios.get(orgSelectTree(''),'').then((result) => {
+            console.log(result)
+            let data = result.data.data;
+            if(data.length != 0){
+                this.setState({
+                    data
+                })
+            }
+        }).catch((err) => {
+            console.log(err)
+        });
     }
 
     render() {

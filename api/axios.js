@@ -98,7 +98,6 @@ var post = function (url, data, isSuccess = false,description) {
   return new Promise((resolve, reject) => {
     const hide = message.loading('loading....', 0);
     axios.post(url, data).then(res => {
-      console.log(res,'axios')
       setTimeout(hide, 0);
       if (res.data.status == 200) {
         if (isSuccess) {
