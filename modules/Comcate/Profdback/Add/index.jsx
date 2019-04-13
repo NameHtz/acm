@@ -110,7 +110,7 @@ class Add extends Component {
             let data = {
                 "title": values.title,
                 "type": values.questionType,
-                "orgid": values.repGroup,
+                "orgid": 0,
                 "userId": 0,
                 "priority": values.questionPriority,
                 "handleTime": "2019-03-27",
@@ -121,15 +121,15 @@ class Add extends Component {
               }
 
               console.log(values)
-            // axios.post(questionAdd, data, true).then((result) => {
+            axios.post(questionAdd, data, true).then((result) => {
 
-            //     console.log(result)
+                console.log(result)
                 
-            //  // this.props.handleCancel();
+             // this.props.handleCancel();
 
-            // }).catch((err) => {
-            //     console.log(err)
-            // });
+            }).catch((err) => {
+                console.log(err)
+            });
         })
     }
     // 获取责任主题

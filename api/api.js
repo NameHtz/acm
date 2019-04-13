@@ -214,15 +214,8 @@ export const questionUpdateInfo = `api/comu/question/{id}/update/info` // get �
 export const  questionUpdate = `api/comu/question/update` // put 问题管理-修改项目问题
 export const questionHandleList = questionId => `/comu/question/handle/${questionId}/list` //get 问题管理-处理记录
 export const  questionHandleAdd = `api/comu/question/handle/add` // post 问题管理-增加问题处理
-// export 
-
-export const questionHandleList = (id,currentPageNum,pageSize) => `api/comu/question/${id}/handle/list/${currentPageNum}/${pageSize}` // post 问题管理-获取问题处理列表
+export const questionHandleDelete = `api/comu/question/handle/delete` // delete 问题管理-删除项目问题处理
 export const questionHandleUpdata = `api/comu/question/handle/update` // put 问题管理-修改项目问题处理
-export const questionHandleDelete = `api/comu/question/handle/delete`  // delete 问题管理-删除项目问题处理
-
-export const questionSolveAppr = id => `api/comu/question/${id}/solveAppr` //put 问题管理-解决审批项目问题
-export const questionClose = id => `api/comu/question/${id}/close` // put 问题管理-关闭项目问题
-export const questionCloseAppr = id => `api/comu/question/${id}/closeAppr` //put 问题处理-关闭审批项目问题
 
 
 

@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic'
 import _ from "lodash";
 import StandardTable from '../../../components/Table/index';
 
-import {questionList,questionDelete} from '../../../api/api'
+import { questionList, questionDelete } from '../../../api/api'
 import axios from '../../../api/axios'
 
 /* *********** 引入redux及redux方法 start ************* */
@@ -48,7 +48,7 @@ export class ComcateProfdback extends Component {
         creatTime: "2018-9-9",
         status: "1"
       }
-    ],
+      ],
       activeIndex: "",
       rightData: [],
       rightTags: [
@@ -57,7 +57,7 @@ export class ComcateProfdback extends Component {
         { icon: 'iconjilu', title: '处理记录', fielUrl: 'Comcate/Profdback/ProfdBackInfo' },
         { icon: 'iconliuchengxinxi', title: '流程信息', fielUrl: 'Plot/Approval/Process' },
       ],
-      deleteQuestionIdList:'',
+      deleteQuestionIdList: '',
     }
 
     /* *********** 添加监听redux中store变化 start ************* */
@@ -152,27 +152,29 @@ export class ComcateProfdback extends Component {
 
   //获取 获取问题列表
   getQuestionList = () => {
-    
-    // axios.get(questionList(' ',this.state.pageSize,this.state.currentPage)).then((result) => {
-    //   console.log(result)
-    //   // 获取到的列表数据
-    //   this.setState({
-    //     // 获取问题列表
-    //     // data:result.data.data,
-    //   })
-
-    // }).catch((err) => {
-    //   console.log(err) 
-    // });
+    axios.get(questionList(' ', this.state.pageSize, this.state.currentPage)).then((result) => {
+      // 获取到的列表数据
+      let data = result.data.data;
+      console.log(data)
+      if (data.length !== 0) {
+        this.setState({
+          // 获取问题列表
+          data,
+        })
+      }
+    }).catch((err) => {
+      console.log(err)
+    });
   }
 
   /**
    * 删除问题
    */
-  deleteQuestion = ()=>{
+  deleteQuestion = () => {
     //要删除的问题id
     let params = this.state.deleteQuestionIdList;
-    axios.deleted(questionDelete,params,false).then((result) => {
+
+    axios.deleted(questionDelete, params, false).then((result) => {
       message.success('This is a normal message');
       console.log(resule)
     }).catch((err) => {
@@ -180,7 +182,7 @@ export class ComcateProfdback extends Component {
       console.log(err)
     });
   }
-  
+
 
   getInfo = (record, index) => {
 
@@ -227,7 +229,7 @@ export class ComcateProfdback extends Component {
       onSelect: (record, selected, selectedRows) => {
         // console.log(record, selected, selectedRows);
         this.setState({
-          deleteQuestionIdList:selectedRows.map(item=>{
+          deleteQuestionIdList: selectedRows.map(item => {
             return item.id;
           })
         })
@@ -235,7 +237,7 @@ export class ComcateProfdback extends Component {
       onSelectAll: (selected, selectedRows, changeRows) => {
         // console.log(selected,selectedRows,changeRows)
         this.setState({
-          deleteQuestionIdList:selectedRows.map(item=>{
+          deleteQuestionIdList: selectedRows.map(item => {
             return item.id
           })
         })
@@ -256,7 +258,7 @@ export class ComcateProfdback extends Component {
       showQuickJumper: true,
       showTotal: total => `每页${this.state.pageSize}/共${Math.ceil(this.state.data.length / this.state.pageSize)}页`,
       onChange: (page, pageSize) => {
-        
+
         this.setState({
           currentPage: page,
           pageSize
@@ -266,7 +268,7 @@ export class ComcateProfdback extends Component {
     }
     return (
       <div>
-        <TopTags  deleteQuestion={this.deleteQuestion}/>
+        <TopTags deleteQuestion={this.deleteQuestion} />
         <div className={style.main}>
           <div className={style.leftMain} style={{ height: this.props.height }}>
             <div style={{ minWidth: 'calc(100vw - 60px)' }}>

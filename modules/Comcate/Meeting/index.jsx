@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import style from './style.less'
 import intl from 'react-intl-universal'
 import { Table } from 'antd'
+import StandardTable from '../../../components/Table'
 import TopTags from './TopTags/index'
 import RightTags from '../../../components/public/RightTags/index'
 import _ from "lodash";
@@ -174,10 +175,10 @@ export class ComcateMeeting extends Component {
     // 获取会议管理列表
     getMeetingList = ()=>{
         axios.get(meetingList(' ', this.state.pageSize,this.state.currentPage)).then((result) => {
-           
-            if(result.data.data.length != 0){
+            let data = result.data.data;
+            if(data.length != 0){
                 this.setState({
-                    data:result.data
+                    data,
                 })
             }
         }).catch((err) => {
@@ -207,6 +208,25 @@ export class ComcateMeeting extends Component {
                 console.log(selected, selectedRows, changeRows);
             },
         };
+
+        let pagination = {
+            total: this.state.data.length,
+            // hideOnSinglePage:true,
+            current: this.state.currentPage,
+            pageSize: this.state.pageSize,
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `每页${this.state.pageSize}/共${Math.ceil(this.state.data.length / this.state.pageSize)}页`,
+            onChange: (page, pageSize) => {
+      
+              this.setState({
+                currentPage: page,
+                pageSize
+              })
+      
+            }
+          }
+
         return (
             <div>
                 <TopTags />
@@ -214,14 +234,14 @@ export class ComcateMeeting extends Component {
                     <div className={style.leftMain} style={{ height: this.props.height }}>
                         <div style={{ minWidth: 'calc(100vw - 60px)' }}>
                             {this.state.initDone &&
-                                <Table
+                                <StandardTable
                                     rowKey={record => record.id}
                                     rowSelection={rowSelection}
                                     defaultExpandAllRows={true}
                                     name={this.props.name}
                                     columns={this.state.columns}
                                     dataSource={this.state.data}
-                                    pagination={false}
+                                    pagination={pagination}
                                     rowClassName={this.setClassName}
                                     onRow={(record, index) => {
                                         return {

@@ -7,7 +7,7 @@ import moment from 'moment';
 import Distribute from '../Distribute'
 import '../../../../asserts/antd-custom.less'
 
-import { questionHandleList } from '../../../../api/api'
+import { questionReleaseList } from '../../../../api/api'
 import axios from '../../../../api/axios'
 
 const Option = Select.Option;
@@ -150,11 +150,11 @@ export class PlanPreparedRelease extends Component {
 
     //获取问题处理列表
     getQuestionHandleList = () => {
-        // axios.get(questionHandleList('', 1, 10)).then((result) => {
-        //     console.log(resule)
-        // }).catch((err) => {
-
-        // });
+        axios.get(questionReleaseList,[0]).then((result) => {
+            console.log(resule)
+        }).catch((err) => {
+            console.log(err)
+        });
     }
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
