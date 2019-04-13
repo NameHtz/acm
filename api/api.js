@@ -181,33 +181,33 @@ export const setBolist = `api/base/set/bo/list`   //业务编码
 //--> 字典表
 export const getBaseSelectTree = typeCode => `api/base/dict/${typeCode}/select/tree`   //保存更新全局设置
 
+
 //--> 沟通管理
 export const meetingList = (projectId,pageSize,currentPageNum) => `api/comu/meeting/${projectId}/${pageSize}/${currentPageNum}/list` //get 沟通管理-会议管理列表
-// export const meetingRelease = id => `api/comu/meeting/${id}/release`   // put 沟通管理-直接发布会议 
-// export const releaseApproval = id => `api/comu/meeting/${id}/release/approval` // put 沟通管理-发布审批会议
-// export const meetingCancel = id => `api/comu/meeting/${id}/cancel`  // put 沟通管理-取消发布会议
-export const meetingDelete = `api/comu/meeting/delete`  // delete 沟通管理-删除会议信息
+export const meetingWfList = (procInstId,pageSize,currentPageNum) => `api/comu/meeting/wf/${procInstId}/${pageSize}/${currentPageNum}/list` //get 沟通管理-流程处理
 export const meetingAdd = `api/comu/meeting/add` // post 沟通管理-新增会议
+export const meetingRelease = 'api/comu/meeting/release' //put 沟通管理-发布审批
+export const meetingDelete = `api/comu/meeting/delete`  // delete 沟通管理-删除会议信息
 export const meetingInfo = id => `api/comu/meeting/${id}/info` // get 沟通管理-会议基本信息
 export const meetingUpdate = `api/comu/meeting/update` //put 沟通管理-更新会议基本信息
-// export const getMeetingActionList = (id,pageSize,currentPageNum) => `api/comu/meeting/${id}/action/list/${pageSize}/${currentPageNum}` //get 沟通管理-获取会议行动列表
-export const meetingActionList = meetingId => `api/comu/meeting/action/${meetinfId}/list` // get 沟通管理-会议行动项
-export const meetingActionDelete = `api/comu/meeting/action/delete` // delete 沟通管理-删除会议行动项
+export const meetingActionList = meetingId => `api/comu/meeting/action/${meetingId}/list` // get 沟通管理-会议行动项
 export const meetingActionAdd = `api/comu/meeting/action/add`  // post 沟通管理-增加会议行动项
-export const meetingActionFeeDback = taskId => `api/comu/meeting/action/${taskId}/feedback` //get 查看进展日志
-export const getMeetingActionInfo = id => `api/comu/meeting/action/${id}/info` // get 沟通管理-会议行动项信息
 export const meetingActionUpdate = `api/comu/meeting/action/update`  // put 沟通管理-修改项目会议行动项
+export const meetingActionDelete = `api/comu/meeting/action/delete` // delete 沟通管理-删除会议行动项
+export const meetingActionFeeDback = taskId => `api/comu/meeting/action/${taskId}/feedback` //get 查看进展日志
+
+// export const getMeetingActionInfo = id => `api/comu/meeting/action/${id}/info` // get 沟通管理-会议行动项信息
 
 export const  questionList = (projectId,pageSize,currentPageNum) => `api/comu/question/${projectId}/${pageSize}/${currentPageNum}/list`  //get 沟通管理-获取问题列表
 export const questionlists = (projectId, taskId ) => `api/comu/question/${projectId}/${taskId}/lists` // get 问题管理-
-const questionWfList = (procInstId,pageSize,currentPageNum) => `api/comu/question/wf/${procInstId}/${pageSize}/${currentPageNum}/list` // get 流程处理（问题流程）
+export const questionWfList = (procInstId,pageSize,currentPageNum) => `api/comu/question/wf/${procInstId}/${pageSize}/${currentPageNum}/list` // get 流程处理（问题流程）
 export const questionAdd = `api/comu/question/add`  // post 问题管理-增加项目问题
 export const questionDelete = `api/comu/question/delete`  // delete 问题管理-删除项目问题
 export const questionRelease = `api/comu/question/release` // put 问题管理-发布项目问题
 export const  questionCancel = `api/comu/question/cancelRelease` // put 问题管理-取消发布项目问题
 export const questionSolve = `api/comuquestion/solve` //put 问题管理 -已经解决
 export const questionInfo = id => `api/comu/question/${id}/info`  // get 沟通管理-基本信息
-export const questionReleaseList = `api/comu/question/release/list`  // get 问题管理-发布列表
+export const questionReleaseList = projectId => `api/comu/question/${projectId}/release/list`  // get 问题管理-发布列表
 export const questionCloseList = `api/comu/question/close/list`
 export const question  = `api/comu/question/solve/list`  //get 问题管理-解决列表
 export const questionUpdateInfo = `api/comu/question/{id}/update/info` // get 问题管理-获取修改项目问题的信息

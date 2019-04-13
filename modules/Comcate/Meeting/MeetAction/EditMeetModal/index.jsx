@@ -19,6 +19,9 @@ class Add extends Component {
         this.setState({visible: false,},()=>{console.log( this.state.flag );});
         this.props.onCancel();
     }
+    componentDidMount(){
+        console.log(this.props)
+    }
 
     render () {
         const flag=this.props.title;

@@ -17,7 +17,7 @@ class EditMeet extends Component {
             initDone: false,
             info: {
                 key:1,
-                actionName: "会议项目计划",
+                actionName: "会议项目计划111111111",
                 actionCode: "ssddd",
                 planStartTime: "2018-12-12",
                 planEndTime: "2019-1-9",

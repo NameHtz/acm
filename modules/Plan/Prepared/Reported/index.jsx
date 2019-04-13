@@ -7,7 +7,7 @@ import moment from 'moment';
 import Distribute from '../Distribute'
 import '../../../../asserts/antd-custom.less'
 
-import { questionHandleList, questionClose} from '../../../../api/api'
+import { questionHandleList} from '../../../../api/api'
 import axios from '../../../../api/axios'
 
 
@@ -126,14 +126,15 @@ export class PlanPreparedRelease extends Component {
         // });
     }
 
+
     // 关闭项目问题
     putQuestionClose = () => {
         // 问题ID
-        axios.put(questionClose(id)).then((result) => {
+        // axios.put(questionClose(id)).then((result) => {
             
-        }).catch((err) => {
+        // }).catch((err) => {
             
-        });
+        // });
     }
     handleSubmit = (e) => {
         e.preventDefault();

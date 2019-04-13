@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import style from './style.less'
-import { Modal, Table ,Button} from 'antd';
+import { Modal, Table ,Button, message} from 'antd';
 import intl from 'react-intl-universal'
 import Search from '../../../../components/public/Search'
 
-import { orgSelectTree } from '../../../../api/api'
+import { orgSelectTree,meetingRelease } from '../../../../api/api'
 import axios from '../../../../api/axios'
 
 const locales = {
@@ -18,6 +18,8 @@ export class PlanPreparedRelease extends Component {
         this.state = {
             initDone: false,
             columns: [],
+            //发布审批id
+            selectRelease:"",
             data: [
                 {
                     id: 1,
@@ -103,11 +105,12 @@ export class PlanPreparedRelease extends Component {
     }
 
     handleOk = () => {
-        alert(this.props.selectType == 1 ? '发布计划' : '发布审批')
+        // alert(this.props.selectType == 1 ? '发布计划' : '发布审批')
+        this.meetingReleae()
     }
 
+    // 获取审审批列表
     getOrgSelectTree = () => {
-
         axios.get(orgSelectTree(''),'').then((result) => {
             console.log(result)
             let data = result.data.data;
@@ -121,6 +124,22 @@ export class PlanPreparedRelease extends Component {
         });
     }
 
+    // 发布审批
+    meetingReleae = () => {
+        // 当前选中的id
+        let data = this.state.selectRelease
+        if(data !== ''){
+            axios.put(meetingRelease,data).then((result) => {
+            console.log(result)
+        }).catch((err) => {
+            console.log(err)
+        });
+        }else{
+            message.info('请选择发布项')
+        }
+    }
+
+
     render() {
         const rowSelection = {
             onChange: (selectedRowKeys, selectedRows) => {
@@ -128,11 +147,18 @@ export class PlanPreparedRelease extends Component {
             },
             onSelect: (record, selected, selectedRows) => {
                 this.setState({
-                    selectData: selectedRows
+                    selectRelease: selectedRows.map(val => val.id)
+                },()=>{
+                    console.log(this.state.selectRelease)
                 })
             },
             onSelectAll: (selected, selectedRows, changeRows) => {
-                console.log(selected, selectedRows, changeRows);
+                // console.log(selected, selectedRows, changeRows);
+                this.setState({
+                    selectRelease:selectedRows.map(val => val.id)
+                },()=>{
+                    console.log(this.state.selectRelease)
+                })
             },
         };
         return (

@@ -32,6 +32,7 @@ export class ComcateMeeting extends Component {
             date: new Date(),
             currentPage: 1,
             pageSize: 10,
+            selectedDeleId:'',
             data: [{
                 id: 1,
                 title: "会议会议",
@@ -202,10 +203,18 @@ export class ComcateMeeting extends Component {
                 console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
             },
             onSelect: (record, selected, selectedRows) => {
-                console.log(record, selected, selectedRows);
+                // console.log(record, selected, selectedRows);
+                // 列表单选获取id
+                this.setState({
+                    selectedDeleId:selectedRows.map((val)=>val.id)
+                })
             },
             onSelectAll: (selected, selectedRows, changeRows) => {
-                console.log(selected, selectedRows, changeRows);
+                // console.log(selected, selectedRows, changeRows);
+                // 列表全选获取id
+                this.setState({
+                    selectedDeleId:selectedRows.map((val)=>val.id)
+                })
             },
         };
 
@@ -229,7 +238,7 @@ export class ComcateMeeting extends Component {
 
         return (
             <div>
-                <TopTags />
+                <TopTags  selectedDeleId={this.state.selectedDeleId}/>
                 <div className={style.main}>
                     <div className={style.leftMain} style={{ height: this.props.height }}>
                         <div style={{ minWidth: 'calc(100vw - 60px)' }}>

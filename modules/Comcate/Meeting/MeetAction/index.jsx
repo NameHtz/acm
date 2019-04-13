@@ -8,6 +8,10 @@ import ModifyTopBtn from"../../../../components/public/TopTags/ModifyTopBtn"
 import DeleteTopBtn from "../../../../components/public/TopTags/DeleteTopBtn"
 import FeedBackBtn from "../../../../components/public/TopTags/FeedBackBtn"
 import EditMeetModal from "./EditMeetModal"
+
+import {meetingActionList} from '../../../../api/api'
+import axios from '../../../../api/axios';
+
 const locales = {
   "en-US": require( '../../../../api/language/en-US.json' ),
   "zh-CN": require( '../../../../api/language/zh-CN.json' )
@@ -39,6 +43,7 @@ class MeetActionForm extends Component {
 
   componentDidMount() {
     this.loadLocales();
+    console.log(this.props)
   }
 
   loadLocales() {
@@ -87,6 +92,16 @@ class MeetActionForm extends Component {
   setClassName = (record,index) => {
     //判断索引相等时添加行的高亮样式
     return record.id === this.state.activeIndex ? `${style[ 'clickRowStyl' ]}` : "";
+  }
+
+  // 获取会议行动项目
+  getMeetingAction = () => {
+    
+    axios.get(meetingActionList()).then((result) => {
+      console.log(result)
+    }).catch((err) => {
+      console.log(err)
+    });
   }
 
   render() {

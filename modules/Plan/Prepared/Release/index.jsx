@@ -80,8 +80,8 @@ export class PlanPreparedRelease extends Component {
     componentDidMount() {
         this.loadLocales()
         // 获取问题列表
-        console.log('wenti----')
-        this.getQuestionHandleList()
+        console.log('问题----')
+        // this.getQuestionHandleList()
     }
 
     loadLocales() {
@@ -150,8 +150,8 @@ export class PlanPreparedRelease extends Component {
 
     //获取问题处理列表
     getQuestionHandleList = () => {
-        axios.get(questionReleaseList,[0]).then((result) => {
-            console.log(resule)
+        axios.get(questionReleaseList(' ')).then((result) => {
+            console.log(result)
         }).catch((err) => {
             console.log(err)
         });

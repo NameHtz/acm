@@ -13,8 +13,8 @@ import Search from '../../../../components/public/Search'
 import style from './style.less'
 import Add from '../Add'
 
-import { meetingActionDelete } from '../../../../api/api';
-import axios from '../../../../api/api'
+import { meetingDelete } from '../../../../api/api';
+import axios from '../../../../api/axios';
 
 
 const confirm = Modal.confirm
@@ -62,14 +62,14 @@ export class PlanDefineTopTags extends Component {
         })
     }
 
-    //删除
+    //删除会议问题
     deleteMeetingAction = () => {
-        let body = {
 
-        }
+        let body = this.props.selectedDeleId;
+        console.log(body)
 
-        axios.deleted(meetingActionDelete, body).then((result) => {
-            console.log(result)
+        axios.deleted(meetingDelete, body).then((result) => {
+            console.log(result,'删除成功')
         }).catch((err) => {
             console.log(err)
         });
@@ -103,7 +103,7 @@ export class PlanDefineTopTags extends Component {
             }
             // 删除
             if (name === 'DeleteTopBtn') {
-
+                this.deleteMeetingAction()
                 return
             }
 
