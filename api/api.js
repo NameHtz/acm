@@ -198,7 +198,7 @@ export const meetingActionFeeDback = taskId => `api/comu/meeting/action/${taskId
 
 
 
-export const  questionList = (projectId,pageSize,currentPageNum) => `api/comu/question/${projectId}/${pageSize}/${currentPageNum}/list`  //get 沟通管理-获取问题列表
+export const questionList = (projectId,pageSize,currentPageNum) => `api/comu/question/${projectId}/${pageSize}/${currentPageNum}/list`  //get 沟通管理-获取问题列表
 export const questionlists = ( taskId ) => `api/comu/question/task/${taskId}/lists` // get 问题管理-
 export const questionWfList = (procInstId,pageSize,currentPageNum) => `api/comu/question/wf/${procInstId}/${pageSize}/${currentPageNum}/list` // get 流程处理（问题流程）
 export const questionAdd = `api/comu/question/add`  // post 问题管理-增加项目问题
@@ -209,7 +209,8 @@ export const questionSolve = `api/comuquestion/solve` //put 问题管理 -解决
 export const questionClose = `api/comu/question/close` // put 问题管理-关闭
 export const questionInfo = id => `api/comu/question/${id}/info`  // get 沟通管理-基本信息
 export const questionReleaseList = projectId => `api/comu/question/${projectId}/release/list`  // get 问题管理-发布列表
-export const questionCancelReleaselist = `api/comu/question/${projectId}/cancel/release/list`  // get 问题管理-取消发布列表
+
+export const questionCancelReleaselist = projectId => `api/comu/question/${projectId}/cancel/release/list`  // get 问题管理-取消发布列表
 export const questionCloselist = projectId =>`api/comu/question/${projectId}/close/list` //get 问题管理 - 关闭列表
 export const questionSolvelist = projectId => `api/comu/question/${projectId}/solve/list` //get 问题管理-解决列表
 export const questionUpdate = `api/comu/question/update` // put 问题管理-修改问题

@@ -4,7 +4,7 @@ import { Modal, Table, Button, message } from 'antd';
 import intl from 'react-intl-universal'
 import Search from '../../../../components/public/Search'
 
-import {questionRelease,questionCancelRelease} from '../../../../api/api'
+import {questionRelease, questionCancelRelease, questionReleaseList} from '../../../../api/api'
 import axios from '../../../../api/axios';
 
 
@@ -57,6 +57,8 @@ export class PlanPreparedRelease extends Component {
     componentDidMount() {
         console.log(this.props.title)
         this.loadLocales()
+        //获取发布列表
+        this.getquestionReleaseList()
     }
 
     loadLocales() {
@@ -103,7 +105,20 @@ export class PlanPreparedRelease extends Component {
     }
 
     // 获取发布列表
-     
+    getquestionReleaseList = ()=> {
+        axios.get(questionReleaseList(' ')).then((result) => {
+            let data = result.data.data;
+            console.log(data)
+            if(data.length != 0){
+                this.setState({
+                    data
+                })
+            }
+        }).catch((err) => {
+            console.log(err)
+        });
+    }
+    
     //发布审批操作
     handleOk = () => {
         // console.log(this.props.selectType)
@@ -117,7 +132,7 @@ export class PlanPreparedRelease extends Component {
             return 0;
         };
 
-        当前的操作
+        // 当前的操作 
         let title = this.props.publicTitle;
         if(title === '直接发布'){
 
@@ -129,7 +144,7 @@ export class PlanPreparedRelease extends Component {
 
         }else if(title === '发布审批'){
 
-            axios.put(questionSolve,selectDataId).then((result) => {
+            axios.put(questionRelease,selectDataId).then((result) => {
                 console.log(result)
             }).catch((err) => {
                 console.log(err)

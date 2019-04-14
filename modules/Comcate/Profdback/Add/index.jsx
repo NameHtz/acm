@@ -110,17 +110,18 @@ class Add extends Component {
             let data = {
                 "title": values.title,
                 "type": values.questionType,
-                "orgid": 0,
-                "userId": 0,
+                "orgId": 1,
+                "userId": 1,
                 "priority": values.questionPriority,
                 "handleTime": "2019-03-27",
                 // "projectId": 0,
                 "taskId": 1,
                 "remark": values.questionRemark,
-                "handle": values.questionhandle
+                "handle": values.questionhandle,
               }
 
               console.log(values)
+
             axios.post(questionAdd, data, true).then((result) => {
 
                 console.log(result)

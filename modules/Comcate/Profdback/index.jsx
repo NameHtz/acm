@@ -30,8 +30,8 @@ export class ComcateProfdback extends Component {
     this.state = {
       date: new Date(),
       initDone: false,
-      currentPage: 1,
       pageSize: 10,
+      currentPage: 1,
       columns: [],
       addRelease: false, //直接发布
       addApproval: false,//发布审批
@@ -152,7 +152,7 @@ export class ComcateProfdback extends Component {
 
   //获取 获取问题列表
   getQuestionList = () => {
-    axios.get(questionList(' ', this.state.pageSize, this.state.currentPage)).then((result) => {
+    axios.get(questionList(' ', this.state.pageSize, this.state.currentPage),'').then((result) => {
       // 获取到的列表数据
       let data = result.data.data;
       console.log(data,'获取问题列表')

@@ -7,7 +7,7 @@ import moment from 'moment';
 import Distribute from '../Distribute'
 import '../../../../asserts/antd-custom.less'
 
-import { questionReleaseList } from '../../../../api/api'
+import { questionSolvelist } from '../../../../api/api'
 import axios from '../../../../api/axios'
 
 const Option = Select.Option;
@@ -81,7 +81,7 @@ export class PlanPreparedRelease extends Component {
         this.loadLocales()
         // 获取问题列表
         console.log('问题----')
-        // this.getQuestionHandleList()
+        this.getQuestionSolvelist()
     }
 
     loadLocales() {
@@ -149,9 +149,15 @@ export class PlanPreparedRelease extends Component {
     }
 
     //获取问题处理列表
-    getQuestionHandleList = () => {
-        axios.get(questionReleaseList(' ')).then((result) => {
-            console.log(result)
+    getQuestionSolvelist = () => {
+        axios.get(questionSolvelist(' ')).then((result) => {
+            console.log(result,'解决列表')
+            let data = result.data.data;
+            if(data.length !== 0){
+                this.setState({
+                    data
+                })
+            }
         }).catch((err) => {
             console.log(err)
         });

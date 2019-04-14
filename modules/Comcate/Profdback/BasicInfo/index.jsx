@@ -64,6 +64,7 @@ export default class BasicInfo extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
 
+        console.log(this.props)
         this.props.form.validateFieldsAndScroll((err, values) => {
             console.log(values)
             if (!err) {
