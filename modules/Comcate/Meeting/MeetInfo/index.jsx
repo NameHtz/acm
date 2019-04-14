@@ -36,7 +36,6 @@ class ComcateMeetingInfo extends Component {
     componentDidMount() {
         this.loadLocales();
         console.log('加载')
-        console.log(this.props.data)
         this.setState({
             width: this.props.width,
             info: this.props.data

@@ -13,14 +13,17 @@ class Add extends Component {
     handleOk = (e) => {
         this.setState( {visible: false,
                        } );
-        this.props.handleCancel()
+        // this.props.handleCancel()
     }
-    handleCancel = (e) => {
+    handleCancel = () => {
         this.setState({visible: false,},()=>{console.log( this.state.flag );});
         this.props.onCancel();
     }
     componentDidMount(){
         console.log(this.props)
+    }
+    getEdirMeetTem = (val)=>{
+        console.log(val)
     }
 
     render () {
@@ -35,15 +38,15 @@ class Add extends Component {
                     width="850px"
                     centered={true}
                     className={style.addFormInfo}
-                    footer={ 
-                        <div className="modalbtn">
-                        <Button key={2}  onClick={this.handleCancel} >关闭</Button>
-                        <Button key={3} onClick={this.handleOk} type="primary">保存</Button>
-                        </div>
-                    }
+                    // footer={ 
+                    //     <div className="modalbtn">
+                    //     <Button key={2}  onClick={this.handleCancel} >关闭</Button>
+                    //     <Button key={3} onClick={this.handleOk} type="primary">保存</Button>
+                    //     </div>
+                    // }
                 >
-                    {flag=="新增会议行动项" || flag =="修改会议行动项" ? <EditMeetTem />:
-                        <FeedBackTem />}
+                    {flag=="新增会议行动项" || flag =="修改会议行动项" ? <EditMeetTem handleCancel={this.handleCancel}  flag={flag}/>:
+                        <FeedBackTem/>}
             </Modal>
             </div>
         )

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import style from './style.less'
-import { Form, Row, Col, Input, InputNumber, Icon, Select, DatePicker, Table, Slider } from 'antd';
+import { Form, Modal, Row, Col, Input, InputNumber, Icon, Select, DatePicker, Table, Slider } from 'antd';
 import intl from 'react-intl-universal'
 import moment from 'moment'
 const locales = {

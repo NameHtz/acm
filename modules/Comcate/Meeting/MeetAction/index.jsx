@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import intl from 'react-intl-universal'
-import { Table, Icon, Select ,Spin,Progress} from 'antd'
+import { Table, Icon, Select ,Spin,Progress, message} from 'antd'
 import style from './style.less'
 import dynamic from 'next/dynamic'
 import AddTopBtn from "../../../../components/public/TopTags/AddTopBtn"
@@ -9,7 +9,7 @@ import DeleteTopBtn from "../../../../components/public/TopTags/DeleteTopBtn"
 import FeedBackBtn from "../../../../components/public/TopTags/FeedBackBtn"
 import EditMeetModal from "./EditMeetModal"
 
-import {meetingActionList} from '../../../../api/api'
+import {meetingActionList, meetingActionDelete} from '../../../../api/api'
 import axios from '../../../../api/axios';
 
 const locales = {
@@ -25,6 +25,7 @@ class MeetActionForm extends Component {
       activeIndex: '',
       title:'',
       visible:false,
+      selectDelId:[],
       data: [ {
         key: 1,
         id: 1,
@@ -43,7 +44,13 @@ class MeetActionForm extends Component {
 
   componentDidMount() {
     this.loadLocales();
-    console.log(this.props)
+    console.log('加载')
+    //获取会议行动项目列表
+    this.getMeetingAction()
+  }
+
+  static getDerivedStateFromProps(props, state){
+    return state;
   }
 
   loadLocales() {
@@ -58,6 +65,7 @@ class MeetActionForm extends Component {
   }
 
   onClickHandle = (name) => {
+    console.log(name)
     if (name == "AddTopBtn") {
       console.log( name)
       this.setState(
@@ -67,6 +75,20 @@ class MeetActionForm extends Component {
       console.log( name)
       this.setState(
         {title:'修改会议行动项',visible:true})
+    }
+    if(name == 'DeleteTopBtn'){
+
+      //删除会议行动项
+      let selectDelId = this.state.selectDelId;
+      if(selectDelId.length !== 0 ){
+        axios.deleted(meetingActionDelete,selectDelId).then((result) => {
+          console.log(result)
+        }).catch((err) => {
+          console.log(err)
+        });
+      }else{
+        message.info('请选择要删除的会议行动项')
+      }
     }
     if (name == "FeedBackBtn") {
       console.log( name)
@@ -94,11 +116,18 @@ class MeetActionForm extends Component {
     return record.id === this.state.activeIndex ? `${style[ 'clickRowStyl' ]}` : "";
   }
 
+
   // 获取会议行动项目
   getMeetingAction = () => {
-    
-    axios.get(meetingActionList()).then((result) => {
-      console.log(result)
+    let {data} = this.props;
+    axios.get(meetingActionList(data.id),'',true).then((result) => {
+      let data = result.data.data;
+
+      if(data.length !== 0){
+        this.setState({
+          data
+        })
+      }
     }).catch((err) => {
       console.log(err)
     });
@@ -161,9 +190,15 @@ class MeetActionForm extends Component {
       },
       onSelect: (record,selected,selectedRows) => {
         console.log( record,selected,selectedRows );
+        this.setState({
+          selectDelId:selectedRows.map(val=>val.id)
+        })
       },
       onSelectAll: (selected,selectedRows,changeRows) => {
         console.log( selected,selectedRows,changeRows );
+        this.setState({
+          selectDelId:selectedRows.map(val=>val.id)
+        })
       },
     };
     return (
