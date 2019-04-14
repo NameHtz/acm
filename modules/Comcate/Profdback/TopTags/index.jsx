@@ -46,7 +46,10 @@ export class PlanDefineTopTags extends Component {
                 }
 
             ],
-            planDefineSelectData: []
+            planDefineSelectData: [],
+
+            //传递给public的title
+            publicTitle:'',
         }
     }
 
@@ -69,7 +72,7 @@ export class PlanDefineTopTags extends Component {
             reportedVisible: false
         })
     }
-  
+
     handlePublicCancel = () => {
         this.setState({
             publicModalVisible: false
@@ -82,6 +85,7 @@ export class PlanDefineTopTags extends Component {
 
         // 显示表单弹窗
         let showFormModal = (name, menu) => {
+
             let that = this
             // 新增
             if (name === 'AddTopBtn') {
@@ -94,16 +98,38 @@ export class PlanDefineTopTags extends Component {
 
             // 删除
             if (name === 'DeleteTopBtn') {
-               this.props.deleteQuestion()
+                this.props.deleteQuestion()
             }
             //发布
-            if (name === 'PublicTopBtn') {
+            if (name === 'direct' || name === 'approve' || name === 'abolish') {
                 // e.key 1发布计划 2发布审批
-                console.log('发布问题')
                 this.setState({
                     publicModalVisible: true,
-                    topSelectBtnType: menu.key
+                    // topSelectBtnType: menu.key
                 })
+            }
+            // 发布
+            switch (name) {
+                case 'direct':
+                    this.setState({
+                        publicTitle: '直接发布'
+                    })
+                    console.log(name, 'direct')
+                    break;
+                case 'approve':
+                    this.setState({
+                        publicTitle: '发布审批'
+                    })
+                    console.log(name, 'approve');
+                    break;
+                case 'abolish':
+                    this.setState({
+                        publicTitle: '取消发布'
+                    })
+                    console.log(name, 'abolish');
+                    break;
+                default:
+                    break;
             }
             // 解决
             if (name === 'SolveTopBtn') {
@@ -133,12 +159,27 @@ export class PlanDefineTopTags extends Component {
                         })
                     }
                 </div>
-                <Public selectType={this.state.topSelectBtnType} modalVisible={this.state.publicModalVisible} handleCancel={this.handlePublicCancel} />
-                <Add modalVisible={this.state.modalVisible} handleCancel={this.handleCancel} modelTitle={this.state.modelTitle} />
+                
+                <Public 
+                selectType={this.state.topSelectBtnType}
+                 modalVisible={this.state.publicModalVisible} 
+                 handleCancel={this.handlePublicCancel} 
+                 publicTitle={this.state.publicTitle}/>
+
+                <Add 
+                modalVisible={this.state.modalVisible} 
+                handleCancel={this.handleCancel} 
+                modelTitle={this.state.modelTitle} />
+
                 {/* 计划编制 -> 下达 */}
-                <Release modalVisible={this.state.releaseVisible} handleCancel={this.handleReleaseCancel} />
+                <Release 
+                modalVisible={this.state.releaseVisible} 
+                handleCancel={this.handleReleaseCancel} />
+
                 {/* 计划编制 -> 上报 */}
-                <Reported modalVisible={this.state.reportedVisible} handleCancel={this.handleReportedCancel} />
+                <Reported
+                 modalVisible={this.state.reportedVisible} 
+                 handleCancel={this.handleReportedCancel} />
             </div>
 
         )

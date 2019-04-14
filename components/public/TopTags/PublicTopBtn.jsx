@@ -11,13 +11,13 @@ class PublicTopBtn extends React.Component {
     render() {
         const menu = (
             <Menu>
-                <Menu.Item key="直接发布" onClick={this.props.onClickHandle.bind(this, 'direct')}>
+                {/* <Menu.Item key="直接发布" onClick={()=>{this.props.onClickHandle('direct')}}>
                   <Icon type="export" />直接发布
-                </Menu.Item>
-                <Menu.Item key="发布审批" onClick={this.props.onClickHandle.bind(this, 'approve')}>
+                </Menu.Item> */}
+                <Menu.Item key="发布审批" onClick={()=>{this.props.onClickHandle('approve')}}>
                   <Icon type="select" />发布审批
                 </Menu.Item>
-                <Menu.Item key="取消发布" onClick={this.props.onClickHandle.bind(this, 'abolish')}>
+                <Menu.Item key="取消发布" onClick={()=>{this.props.onClickHandle('abolish')}}>
                   <Icon type="select" />取消发布
                 </Menu.Item>
             </Menu>
@@ -25,7 +25,7 @@ class PublicTopBtn extends React.Component {
         return (
             <span  className={`topBtnActivity ${style.main}`}>
                 <Icon type="copy" />
-                <Dropdown overlay={menu} onClick={this.props.onClickHandle.bind(this, 'PublicTopBtn')}>
+                <Dropdown overlay={menu}>
                     <a className="ant-dropdown-link" href="#"> 发布 <Icon type="down" /></a>
                 </Dropdown>
             </span>

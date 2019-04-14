@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import style from './style.less'
-import { Modal, Table,Button } from 'antd';
+import { Modal, Table, Button, message } from 'antd';
 import intl from 'react-intl-universal'
 import Search from '../../../../components/public/Search'
+
+import {questionRelease,questionCancelRelease} from '../../../../api/api'
+import axios from '../../../../api/axios';
 
 
 const locales = {
@@ -16,6 +19,7 @@ export class PlanPreparedRelease extends Component {
         this.state = {
             initDone: false,
             columns: [],
+            selectDataId:[],
             data: [
                 {
                     id: 1,
@@ -51,6 +55,7 @@ export class PlanPreparedRelease extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props.title)
         this.loadLocales()
     }
 
@@ -97,9 +102,49 @@ export class PlanPreparedRelease extends Component {
         });
     }
 
+    // 获取发布列表
+     
+    //发布审批操作
     handleOk = () => {
-        console.log(this.props.selectType)
-        alert(this.props.selectType == 1 ? '发布计划' : '发布审批')
+        // console.log(this.props.selectType)
+        // alert(this.props.selectType == 1 ? '发布计划' : '发布审批')
+        console.log(this.props.publicTitle)
+        let selectDataId = this.state.selectDataId;
+
+        // 当前要操作数据不可以为空
+        if(selectDataId.length === 0){
+            message.error('您还没选择问题');
+            return 0;
+        };
+
+        当前的操作
+        let title = this.props.publicTitle;
+        if(title === '直接发布'){
+
+            axios.put(questionRelease,selectDataId).then((result) => {
+                console.log(result)
+            }).catch((err) => {
+                console.log(err)
+            });
+
+        }else if(title === '发布审批'){
+
+            axios.put(questionSolve,selectDataId).then((result) => {
+                console.log(result)
+            }).catch((err) => {
+                console.log(err)
+            });
+
+        }else if(title === '取消发布'){
+
+            axios.put(questionCancelRelease,selectDataId).then((result) => {
+                console.log(result)
+            }).catch((err) => {
+                console.log(err)
+            });
+        }
+
+
     }
 
     render() {
@@ -108,26 +153,35 @@ export class PlanPreparedRelease extends Component {
                 //console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
             },
             onSelect: (record, selected, selectedRows) => {
+                // console.log(record, selected, selectedRows)
                 this.setState({
-                    selectData: selectedRows
+                    selectDataId: selectedRows.map(val=>val.id)
                 })
             },
             onSelectAll: (selected, selectedRows, changeRows) => {
-                console.log(selected, selectedRows, changeRows);
-                console.log(this.props.modalVisible)
+                // console.log(selected, selectedRows, changeRows);
+                this.setState({
+                    selectDataId:selectedRows.map(val=>val.id)
+                })
             },
         };
         return (
-            <Modal className={style.main} width="850px" forceRender={true} centered={true}
-                title={this.props.selectType == 1 ? '发布计划' : '发布审批'} visible={this.props.modalVisible}
-                 onOk={this.handleOk} onCancel={this.props.handleCancel} bodyStyle={{ padding: 0 }} 
-                 footer={ 
+            <Modal className={style.main} width="850px"
+                forceRender={true}
+                centered={true}
+                // title={this.props.selectType == 1 ? '发布计划' : '发布审批'}
+                title={this.props.publicTitle}
+                visible={this.props.modalVisible}
+                onOk={this.handleOk}
+                onCancel={this.props.handleCancel}
+                bodyStyle={{ padding: 0 }}
+                footer={
                     <div className="modalbtn">
-                    <Button key={2}  onClick={this.handleCancel} >关闭</Button>
-                    <Button key={3} onClick={this.handleOk} type="primary">保存</Button>
+                        <Button key={2} onClick={this.handleCancel} >关闭</Button>
+                        <Button key={3} onClick={this.handleOk} type="primary">保存</Button>
                     </div>
                 }
-                 >
+            >
                 <div className={style.tableMain}>
                     <div className={style.search}>
                         <Search />

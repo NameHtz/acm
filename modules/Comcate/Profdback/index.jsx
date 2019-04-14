@@ -155,7 +155,7 @@ export class ComcateProfdback extends Component {
     axios.get(questionList(' ', this.state.pageSize, this.state.currentPage)).then((result) => {
       // 获取到的列表数据
       let data = result.data.data;
-      console.log(data)
+      console.log(data,'获取问题列表')
       if (data.length !== 0) {
         this.setState({
           // 获取问题列表
@@ -174,13 +174,24 @@ export class ComcateProfdback extends Component {
     //要删除的问题id
     let params = this.state.deleteQuestionIdList;
 
-    axios.deleted(questionDelete, params, false).then((result) => {
-      message.success('This is a normal message');
-      console.log(resule)
-    }).catch((err) => {
-      message.error('This is a normal message');
-      console.log(err)
-    });
+    // axios.deleted(questionDelete, params, false).then((result) => {
+    //   message.success('This is a normal message');
+    //   console.log(resule)
+    // }).catch((err) => {
+    //   message.error('This is a normal message');
+    //   console.log(err)
+    // });
+    if(params.length !== 0){
+      axios.deleted(questionDelete, params, false).then((result) => {
+        message.success('This is a normal message');
+        console.log(resule)
+      }).catch((err) => {
+        message.error('This is a normal message');
+        console.log(err)
+      });
+    }else{
+      message.error('请选择要删除的问题')
+    }
   }
 
 
