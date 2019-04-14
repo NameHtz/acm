@@ -47,8 +47,7 @@ export class ComcateProfdback extends Component {
         creator: "WSD",
         creatTime: "2018-9-9",
         status: "1"
-      }
-      ],
+      }],
       activeIndex: "",
       rightData: [],
       rightTags: [
@@ -155,7 +154,7 @@ export class ComcateProfdback extends Component {
     axios.get(questionList(' ', this.state.pageSize, this.state.currentPage),'').then((result) => {
       // 获取到的列表数据
       let data = result.data.data;
-      console.log(data,'获取问题列表')
+      console.log(data,'获取问题列表-------')
       if (data.length !== 0) {
         this.setState({
           // 获取问题列表

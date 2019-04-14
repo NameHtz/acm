@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { Button, Col, Form, Input, Row, Select,Icon } from 'antd'
+import { Button, Col, Form, Input, Row, Select,Icon, message} from 'antd'
 import intl from 'react-intl-universal'
 import style from './index.less'
 import PlanTaskModal from "../PlanTaskModal"
 
-import {questionInfo} from '../../../../api/api'
+import {questionUpdate} from '../../../../api/api'
 import axios from '../../../../api/axios'
 
 const FormItem = Form.Item
@@ -47,6 +47,7 @@ export default class BasicInfo extends Component {
         this.setState({
             width: this.props.width
         })
+        console.log(this.props)
     }
 
     loadLocales() {
@@ -60,20 +61,71 @@ export default class BasicInfo extends Component {
             });
     }
 
-    //
+    // 更新问题
     handleSubmit = (e) => {
         e.preventDefault();
 
         console.log(this.props)
         this.props.form.validateFieldsAndScroll((err, values) => {
             console.log(values)
+             
+            //values
+            /**
+             * " handleTime": "2018-10-29"
+             *" userName": "孙伯域"
+             *additionRequest: "暂无"
+             *creatTime: "2018-9-9"
+             *creator: "WSD"
+             *iptname: "研发部"
+             *plantask: "产品需求设计"
+             *projectname: "ACM产品开发项目"
+             *questionPriority: "新建"
+             *questionRemark: "在项目编辑页面添加..."
+             *questionType: "技术问题"
+             *title: "项目发布之前相关人士是否通知"
+             */
+
+            //data
+            /**
+             * id (integer, optional): id ,
+             * title (string, optional): 问题标题 ,
+             * type (string, optional): 问题类型 ,
+             * priority (string, optional): 优先级 ,
+             * userId (integer, optional): 责任人 ,
+             * orgId (integer, optional): 责任主体 ,
+             * remark (string, optional): 问题说明 ,
+             * handle (string, optional): 处理要求 ,
+             * handleTime (string, optional): 要求处理日期 ,
+             * taskId (integer, optional): 所属计划任务
+             */
+            
+            let {data} = this.props;
+            let propsData = data;
+            if(Array.isArray(propsData)){
+                message.error('请选择一条问题')
+                return 0;
+            }
+            console.log(propsData)
             if (!err) {
                 console.log('Received values of form: ', values);
-                // axios.put().then((result) => {
-                    
-                // }).catch((err) => {
-                    
-                // });
+
+                let data = {
+                    id:propsData.id,
+                    title:values.title,
+                    type:values.questionType,
+                    priority:values.questionPriority,
+                    // userId:values.userName,
+                    userId:1,
+                    remark:values.questionRemark,
+                    handle:values.additionRequest,
+                    handleTime:values.handleTime,
+                    taskId:values.plantask,
+                }
+                axios.put(questionUpdate,data).then((result) => {
+                    console.log(result)
+                }).catch((err) => {
+                    console.log(err)
+                });
             }
         });
     }

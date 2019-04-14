@@ -7,7 +7,7 @@ import moment from 'moment';
 import Distribute from '../Distribute'
 import '../../../../asserts/antd-custom.less'
 
-import { questionHandleList} from '../../../../api/api'
+import { questionCloselist } from '../../../../api/api'
 import axios from '../../../../api/axios'
 
 
@@ -68,7 +68,9 @@ export class PlanPreparedRelease extends Component {
     }
 
     componentDidMount() {
-        this.loadLocales()
+        this.loadLocales();
+        // 关闭问题列表
+        this.getQuestionHandleList();
     }
 
     loadLocales() {
@@ -117,13 +119,17 @@ export class PlanPreparedRelease extends Component {
 
     //获取问题处理列表
     getQuestionHandleList = () => {
-        // axios.post(questionHandleList('', 1, 10)).then((result) => {
-        //     this.setState({
-        //         data: result.data
-        //     })
-        // }).catch((err) => {
-
-        // });
+       axios.get(questionCloselist(' ')).then((result) => {
+           let data = result.data.data;
+           console.log(data)
+           if(data.length != 0){
+               this.setState({
+                   data
+               })
+           }
+       }).catch((err) => {
+           
+       });
     }
 
 
