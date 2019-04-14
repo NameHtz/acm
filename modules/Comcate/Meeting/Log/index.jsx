@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
-import { Table, Progress, Icon } from 'antd'
+import { Table, Progress, Icon, message } from 'antd'
 import intl from 'react-intl-universal'
 import style from './style.less'
 import DeleteTopBtn from '../../../../components/public/TopTags/DeleteTopBtn' //删除按钮
+
+import { meetingActionFeeDback } from '../../../../api/api'
+import axios from '../../../../api/axios'
 
 const locales = {
     "en-US": require('../../../../api/language/en-US.json'),
@@ -17,34 +20,35 @@ export class PlanComponentsLog extends Component {
             initDone: false,
             columns: [],
             data: [
-                {
-                    id: 1,
-                    endTime: '2018-11-11',
-                    progressTime: '2018-12-11',
-                    progress: ['1'],
-                    actStartTime: '2018-11-11',
-                    actEndTime: '2018-12-11',
-                    planComplete: '2018-12-11',
-                    status: '已批准',
-                    progressdesc: '--',
-                },
-                {
-                    id: 2,
-                    endTime: '2018-11-11',
-                    progressTime: '2018-12-11',
-                    progress: ['1'],
-                    actStartTime: '2018-11-11',
-                    actEndTime: '2018-12-11',
-                    planComplete: '2018-12-11',
-                    status: '审批中',
-                    progressdesc: '--',
-                }
+                // {
+                //     id: 1,
+                //     endTime: '2018-11-11',
+                //     progressTime: '2018-12-11',
+                //     progress: ['1'],
+                //     actStartTime: '2018-11-11',
+                //     actEndTime: '2018-12-11',
+                //     planComplete: '2018-12-11',
+                //     status: '已批准',
+                //     progressdesc: '--',
+                // },
+                // {
+                //     id: 2,
+                //     endTime: '2018-11-11',
+                //     progressTime: '2018-12-11',
+                //     progress: ['1'],
+                //     actStartTime: '2018-11-11',
+                //     actEndTime: '2018-12-11',
+                //     planComplete: '2018-12-11',
+                //     status: '审批中',
+                //     progressdesc: '--',
+                // }
             ]
         }
     }
 
     componentDidMount() {
         this.loadLocales()
+        this.getFeeDback()
     }
 
     setClassName = (record, index) => {
@@ -132,9 +136,28 @@ export class PlanComponentsLog extends Component {
         });
     }
 
+    // 获取进展日志
+    getFeeDback = () => {
+        let propsData = this.props.data
+        if(Array.isArray(propsData) === true){
+            message.info('请选择一条会议')
+            return 0;
+        }
+        axios.get(meetingActionFeeDback()).then((result) => {
+            let data = result.data.data;
+            if (data.length != 0) {
+                this.setState({
+                    data
+                })
+            }
+        }).catch((err) => {
+
+        });
+    }
+
     render() {
         const showFormModal = () => {
-            
+
         }
 
         return (

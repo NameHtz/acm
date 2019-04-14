@@ -92,17 +92,7 @@ class ComcateMeetingInfo extends Component {
             }
         });
     }
-    // 会议基本信息
-    // getMeetingInfo = () => {
-    //     axios.get(meetingInfo()).then((result) => {
-    //         console.log(result)
-    //         this.setState({
-    //             info:result.data
-    //         })
-    //     }).catch((err) => {
-    //         console.log(err);
-    //     });
-    // }
+  
     render() {
         const {
             getFieldDecorator, getFieldsError, getFieldError, isFieldTouched,
