@@ -35,19 +35,21 @@ export class ComcateProfdback extends Component {
       columns: [],
       addRelease: false, //直接发布
       addApproval: false,//发布审批
-      data: [{
-        id: 1,
-        title: "项目发布之前相关人士是否通知",
-        questionType: "技术问题",
-        questionPriority: "高",
-        userName: "孙伯域",
-        questionRemark: "在项目编辑页面添加...",
-        questionHandle: "务必在处理之前...",
-        handleTime: "2018-10-29",
-        creator: "WSD",
-        creatTime: "2018-9-9",
-        status: "1"
-      }],
+      data: [
+      //   {
+      //   id: 1,
+      //   title: "项目发布之前相关人士是否通知",
+      //   questionType: "技术问题",
+      //   questionPriority: "高",
+      //   userName: "孙伯域",
+      //   questionRemark: "在项目编辑页面添加...",
+      //   questionHandle: "务必在处理之前...",
+      //   handleTime: "2018-10-29",
+      //   creator: "WSD",
+      //   creatTime: "2018-9-9",
+      //   status: "1"
+      // }
+    ],
       activeIndex: "",
       rightData: [],
       rightTags: [
@@ -154,7 +156,6 @@ export class ComcateProfdback extends Component {
     axios.get(questionList(' ', this.state.pageSize, this.state.currentPage),'').then((result) => {
       // 获取到的列表数据
       let data = result.data.data;
-      console.log(data,'获取问题列表-------')
       if (data.length !== 0) {
         this.setState({
           // 获取问题列表

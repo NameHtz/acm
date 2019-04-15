@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import style from './style.less'
-import { Form, Row, Col, Input, Button, Icon, Select, DatePicker, Modal, Table } from 'antd';
+import { Form, Row, Col, Input, Button, Icon, Select, DatePicker, Modal, Table, message } from 'antd';
 import intl from 'react-intl-universal'
+
+import {questionHandleAdd,questionHandleUpdate} from '../../../../../api/api'
+import axios from '../../../../../api/axios'
 
 const locales = {
   "en-US": require('../../../../../api/language/en-US.json'),
@@ -24,26 +27,26 @@ class EditModal extends Component {
         remark: 1,
       },
       data: [
-        {
-          key: "[0]",
-          id: "1",
-          fileName: "需求计划",
-          fileType: "word",
-          oprate: <Icon type="close" />
-        }, {
-          key: "[1]",
-          id: "2",
-          fileName: "需求计划",
-          fileType: "word",
-          operate: <Icon type="close" />
-        }
+        // {
+        //   key: "[0]",
+        //   id: "1",
+        //   fileName: "需求计划",
+        //   fileType: "word",
+        //   oprate: <Icon type="close" />
+        // }, {
+        //   key: "[1]",
+        //   id: "2",
+        //   fileName: "需求计划",
+        //   fileType: "word",
+        //   operate: <Icon type="close" />
+        // }
       ]
     }
   }
 
   componentDidMount() {
     this.loadLocales();
-    console.log('加载')
+    
     this.setState({
       width: this.props.width
     })
@@ -70,10 +73,43 @@ class EditModal extends Component {
   }
   handleSubmit = (e) => {
     e.preventDefault();
-    alert(1)
+    let {data} = this.props;
+    if(Array.isArray(data)){
+      message.error('请选择一条问题');
+      return 0;
+    }
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        // console.log('Received values of form: ', values);
+
+        // questionId (integer, optional): 所属问题 ,
+        // handleTime (string, optional): 处理时间 ,
+        // handleUser (string, optional): 处理人 ,
+        // handleResult (string, optional): 处理结果说明 ,
+        // fileIds (Array[integer], optional): 附件
+
+        let body = {
+          handleTime:values['meetTime'].format('YYYY-MM-DD'),
+          handleUser: values.creator,
+          handleResult: values.remark,
+          questionId:data.id,
+          // fileIds
+        }
+       if(this.props.title === '修改修改记录'){
+            axios.put(questionHandleUpdate,body).then((result) => {
+              console.log(result)
+            }).catch((err) => {
+              console.log(err)
+            });
+       }else{
+        axios.post(questionHandleAdd,body).then((result) => {
+
+          this.props.handleCancel()
+          
+        }).catch((err) => {
+          
+        });
+       }
       }
     });
   }
@@ -129,7 +165,7 @@ class EditModal extends Component {
             footer={ 
               <div className="modalbtn">
               <Button key={2}  onClick={this.handleCancel} >关闭</Button>
-              <Button key={3} onClick={this.handleOk} type="primary">保存</Button>
+              <Button key={3} onClick={this.handleSubmit} type="primary">保存</Button>
               </div>
           }
           >

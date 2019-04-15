@@ -35,7 +35,7 @@ class ComcateMeetingInfo extends Component {
     }
     componentDidMount() {
         this.loadLocales();
-        console.log('加载')
+        
         this.setState({
             width: this.props.width,
             info: this.props.data
@@ -58,11 +58,11 @@ class ComcateMeetingInfo extends Component {
 
         this.props.form.validateFieldsAndScroll((err, fieldsValue) => {
             if (!err) {
-                console.log('Received values of form: ', fieldsValue);
+                // console.log('Received values of form: ', fieldsValue);
 
-                // creatTime: Moment {_isAMomentObject: true, _i: 1, _isUTC: false, _pf: {…}, _locale: Locale, …}
+                // creatTime: 
                 // creator: "WSD"
-                // meetTime: Moment {_isAMomentObject: true, _i: "2018-10-20", _f: "YYYY-MM-DD", _isUTC: false, _pf: {…}, …}
+                // meetTime: 
                 // meetingAddress: "第一会议室"
                 // meetingRemark: "务必在要求之前完成"
                 // meetingType: "项目会议"

@@ -21,35 +21,35 @@ export class PlanPreparedRelease extends Component {
             columns: [],
             selectDataId:[],
             data: [
-                {
-                    id: 1,
-                    name: 'ACM产品开发计划1',
-                    code: 'XM',
-                    planStartTime: '2018-08-10',
-                    planEndTime: '2018-08-10',
-                    iptName: '研发部',
-                    userName: '孙博宇',
-                    children: [
-                        {
-                            id: 2,
-                            name: 'ACM产品开发计划1-1',
-                            code: 'XM2',
-                            planStartTime: '2018-08-10',
-                            planEndTime: '2018-08-10',
-                            iptName: '研发部',
-                            userName: '孙博宇',
-                        },
-                        {
-                            id: 3,
-                            name: 'ACM产品开发计划1-2',
-                            code: 'XM3',
-                            planStartTime: '2018-08-10',
-                            planEndTime: '2018-08-10',
-                            iptName: '研发部',
-                            userName: '孙博宇',
-                        }
-                    ]
-                }
+                // {
+                //     id: 1,
+                //     name: 'ACM产品开发计划1',
+                //     code: 'XM',
+                //     planStartTime: '2018-08-10',
+                //     planEndTime: '2018-08-10',
+                //     iptName: '研发部',
+                //     userName: '孙博宇',
+                //     children: [
+                //         {
+                //             id: 2,
+                //             name: 'ACM产品开发计划1-1',
+                //             code: 'XM2',
+                //             planStartTime: '2018-08-10',
+                //             planEndTime: '2018-08-10',
+                //             iptName: '研发部',
+                //             userName: '孙博宇',
+                //         },
+                //         {
+                //             id: 3,
+                //             name: 'ACM产品开发计划1-2',
+                //             code: 'XM3',
+                //             planStartTime: '2018-08-10',
+                //             planEndTime: '2018-08-10',
+                //             iptName: '研发部',
+                //             userName: '孙博宇',
+                //         }
+                //     ]
+                // }
             ]
         }
     }
@@ -108,7 +108,7 @@ export class PlanPreparedRelease extends Component {
     getquestionReleaseList = ()=> {
         axios.get(questionReleaseList(' ')).then((result) => {
             let data = result.data.data;
-            console.log(data)
+            // console.log(data)
             if(data.length != 0){
                 this.setState({
                     data

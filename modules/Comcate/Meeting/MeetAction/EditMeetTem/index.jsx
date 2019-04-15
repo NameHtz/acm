@@ -18,23 +18,23 @@ class EditMeet extends Component {
         super(props)
         this.state = {
             initDone: false,
+            //数据实例
             info: {
-                key: 1,
-                actionName: "会议项目计划111111111",
-                actionCode: "ssddd",
-                planStartTime: "2018-12-12",
-                planEndTime: "2019-1-9",
-                iptName: "研发部门",
-                userName: "孙渤海",
-                completeStatus: 60,
+                // key: 1,
+                // actionName: "会议项目计划111111111",
+                // actionCode: "ssddd",
+                // planStartTime: "2018-12-12",
+                // planEndTime: "2019-1-9",
+                // iptName: "研发部门",
+                // userName: "孙渤海",
+                // completeStatus: 60,
             }
         }
     }
 
     componentDidMount() {
         this.loadLocales();
-        console.log('加载')
-        console.log(this.props)
+        
         this.setState({
             width: this.props.width
         })

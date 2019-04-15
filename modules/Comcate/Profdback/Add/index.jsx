@@ -78,14 +78,12 @@ class Add extends Component {
     //     e.preventDefault();
     //     alert(1)
     //     console.log(e)
-
     // }
     handleSubmit = (e) => {
         //调用子组件的自定义方法getItemsValue
         this.questionAdd()
-
     }
-
+    
     //添加一条项目问题
     questionAdd = () => {
         /**
@@ -100,34 +98,26 @@ class Add extends Component {
            repGroup: "研发部"
            title: "项目发布之前相关人士是否通知"
         */
-
         this.props.form.validateFieldsAndScroll((err, values) => {
             /**
              * 获取form表单里的数据
              * valuse
              * */
-
             let data = {
                 "title": values.title,
                 "type": values.questionType,
                 "orgId": 1,
                 "userId": 1,
                 "priority": values.questionPriority,
-                "handleTime": "2019-03-27",
+                "handleTime": values['handleTime'].format('YYYY-MM-DD'),
                 // "projectId": 0,
                 "taskId": 1,
                 "remark": values.questionRemark,
                 "handle": values.questionhandle,
               }
 
-              console.log(values)
-
             axios.post(questionAdd, data, true).then((result) => {
-
-                console.log(result)
-                
              // this.props.handleCancel();
-
             }).catch((err) => {
                 console.log(err)
             });
@@ -141,7 +131,6 @@ class Add extends Component {
         //     console.log(err)
         // });
     }
-
 
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched, } = this.props.form;

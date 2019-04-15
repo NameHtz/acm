@@ -66,10 +66,8 @@ export class PlanDefineTopTags extends Component {
     deleteMeetingAction = () => {
 
         let body = this.props.selectedDeleId;
-        console.log(body)
-
         axios.deleted(meetingDelete, body).then((result) => {
-            console.log(result,'删除成功')
+            console.log(result,'删除操作')
         }).catch((err) => {
             console.log(err)
         });

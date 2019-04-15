@@ -121,7 +121,7 @@ export class PlanPreparedRelease extends Component {
     getQuestionHandleList = () => {
        axios.get(questionCloselist(' ')).then((result) => {
            let data = result.data.data;
-           console.log(data)
+        //    console.log(data)
            if(data.length != 0){
                this.setState({
                    data

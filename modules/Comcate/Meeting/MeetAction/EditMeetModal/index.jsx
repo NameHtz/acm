@@ -20,10 +20,7 @@ class Add extends Component {
         this.props.onCancel();
     }
     componentDidMount(){
-        console.log(this.props)
-    }
-    getEdirMeetTem = (val)=>{
-        console.log(val)
+        
     }
 
     render () {

@@ -112,7 +112,7 @@ export class PlanPreparedRelease extends Component {
     // 获取审审批列表
     getOrgSelectTree = () => {
         axios.get(orgSelectTree(''),'').then((result) => {
-            console.log(result)
+            
             let data = result.data.data;
             if(data.length != 0){
                 this.setState({
@@ -148,16 +148,12 @@ export class PlanPreparedRelease extends Component {
             onSelect: (record, selected, selectedRows) => {
                 this.setState({
                     selectRelease: selectedRows.map(val => val.id)
-                },()=>{
-                    console.log(this.state.selectRelease)
                 })
             },
             onSelectAll: (selected, selectedRows, changeRows) => {
                 // console.log(selected, selectedRows, changeRows);
                 this.setState({
                     selectRelease:selectedRows.map(val => val.id)
-                },()=>{
-                    console.log(this.state.selectRelease)
                 })
             },
         };

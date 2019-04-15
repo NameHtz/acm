@@ -44,7 +44,7 @@ class MeetActionForm extends Component {
 
   componentDidMount() {
     this.loadLocales();
-    console.log('加载')
+    // console.log('加载')
     //获取会议行动项目列表
     this.getMeetingAction()
   }
@@ -67,12 +67,10 @@ class MeetActionForm extends Component {
   onClickHandle = (name) => {
     console.log(name)
     if (name == "AddTopBtn") {
-      console.log( name)
       this.setState(
         {title:'新增会议行动项',visible:true})
     }
     if (name == "ModifyTopBtn") {
-      console.log( name)
       this.setState(
         {title:'修改会议行动项',visible:true})
     }
@@ -91,7 +89,6 @@ class MeetActionForm extends Component {
       }
     }
     if (name == "FeedBackBtn") {
-      console.log( name)
       this.setState(
         {title:'进展反馈',visible:true})
     }

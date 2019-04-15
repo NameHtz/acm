@@ -47,7 +47,7 @@ export default class BasicInfo extends Component {
         this.setState({
             width: this.props.width
         })
-        console.log(this.props)
+       
     }
 
     loadLocales() {
@@ -65,10 +65,8 @@ export default class BasicInfo extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(this.props)
+   
         this.props.form.validateFieldsAndScroll((err, values) => {
-            console.log(values)
-             
             //values
             /**
              * " handleTime": "2018-10-29"
@@ -105,10 +103,9 @@ export default class BasicInfo extends Component {
                 message.error('请选择一条问题')
                 return 0;
             }
-            console.log(propsData)
+            
             if (!err) {
-                console.log('Received values of form: ', values);
-
+                // console.log('Received values of form: ', values);
                 let data = {
                     id:propsData.id,
                     title:values.title,
