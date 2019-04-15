@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import style from './style.less'
 import moment from 'moment';
-import { Modal, Button, Form, Row, Col, Input, Icon, Select, DatePicker } from 'antd';
+import { Modal, Button, Form, Row, Col, Input, Icon, Select, DatePicker, TreeSelect } from 'antd';
 import intl from 'react-intl-universal'
 import PlanTaskModal from "../PlanTaskModal"
 
-import { questionAdd, getUserInfoById, orgTree } from '../../../../api/api'
+import { questionAdd, orgTree, epsTree, getUserByOrgId } from '../../../../api/api'
 import axios from '../../../../api/axios'
 
 const locales = {
@@ -20,6 +20,8 @@ class Add extends Component {
         this.state = {
             initDone: false,
             title: '基本信息',
+            userId: null,
+            isUserId: true,
             data: {
                 // key: "1",
                 // title: "项目发布之前相关人士是否通知",
@@ -42,11 +44,14 @@ class Add extends Component {
     }
     componentDidMount() {
         this.loadLocales();
-        this.getOrgTree();
+
+        this.getOrgAndUser();
+        this.getEps();
+
         this.setState({
             width: this.props.width
         })
-        
+
     }
     //打开计划任务
     OpenTaskModal = () => {
@@ -74,16 +79,14 @@ class Add extends Component {
         const values = this.props.form.getFieldsValue();//4、getFieldsValue：获取一组输入控件的值，如不传入参数，则获取全部组件的值
         return values;
     }
-    // handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     alert(1)
-    //     console.log(e)
-    // }
+
     handleSubmit = (e) => {
+        e.preventDefault();
         //调用子组件的自定义方法getItemsValue
+        console.log(e)
         this.questionAdd()
     }
-    
+
     //添加一条项目问题
     questionAdd = () => {
         /**
@@ -103,33 +106,73 @@ class Add extends Component {
              * 获取form表单里的数据
              * valuse
              * */
+
             let data = {
                 "title": values.title,
                 "type": values.questionType,
-                "orgId": 1,
-                "userId": 1,
+                "orgId": values.repGroup,
+                "userId": values.userId,
                 "priority": values.questionPriority,
                 "handleTime": values['handleTime'].format('YYYY-MM-DD'),
                 // "projectId": 0,
-                "taskId": 1,
+                "taskId": values.task,
                 "remark": values.questionRemark,
                 "handle": values.questionhandle,
-              }
-
+            }
+            console.log(data)
             axios.post(questionAdd, data, true).then((result) => {
-             // this.props.handleCancel();
-            }).catch((err) => {
-                console.log(err)
-            });
+                this.props.handleCancel();
+            })
         })
     }
     // 获取责任主题
-    getOrgTree = () => {
-        // axios.get(orgTree,'').then((result) => {
-        //     console.log(result)
-        // }).catch((err) => {
-        //     console.log(err)
-        // });
+    // getOrgTree = () => {
+    //     axios.get(iptTree).then((result) => {
+    //         this.setState({
+    //             orglist:result.data.data
+    //         })
+    //     }).catch((err) => {
+    //         console.log(err)
+    //     });
+    // }
+
+
+    //获取责任人主体、
+    getOrgAndUser = () => {
+        axios.get(orgTree).then(res => {
+            // console.log(res)
+            this.setState({
+                orglist: res.data.data
+            })
+        })
+    }
+    //获取项目群
+    getEps = () => {
+        axios.get(epsTree).then(res => {
+            // console.log(res)
+            this.setState({ epsList: res.data.data })
+        })
+    }
+    //选择责任主体联动责任人
+    onTreeChange = (v) => {
+        const { info } = this.state
+        this.setState({
+            userId: null,
+            isUserId: false
+        }, () => {
+            this.getUser(v)
+        })
+
+    }
+
+    //责任人
+    getUser = (id) => {
+        axios.get(getUserByOrgId(id)).then(res => {
+            // console.log(res.data.data)
+            this.setState({
+                userlist: res.data.data
+            })
+        })
     }
 
     render() {
@@ -202,23 +245,37 @@ class Add extends Component {
                                     <Col span={11}>
                                         <FormItem label={intl.get("wsd.i18n.comu.meetingaction.iptname")} {...formItemLayout}>
                                             {getFieldDecorator('repGroup', {
-                                                initialValue: data.repGroup,
+                                                // initialValue: data.repGroup,
+                                                rules: [],
                                             })(
-                                                <Select>
-                                                    <Option value='研发部'>研发部</Option>
-                                                    <Option value='销售部'>销售部</Option>
-                                                </Select>
+                                                <TreeSelect
+                                                    // showSearch
+
+                                                    style={{ width: "100%" }}
+                                                    treeData={this.state.orglist}
+                                                    // allowClear
+                                                    treeDefaultExpandAll
+                                                    onChange={this.onTreeChange}
+                                                />
                                             )}
                                         </FormItem>
                                     </Col>
                                     <Col span={11}>
                                         <FormItem label={intl.get("wsd.i18n.comu.question.username")} {...formItemLayout}>
-                                            {getFieldDecorator(' userName', {
-                                                initialValue: data.userName,
+                                            {getFieldDecorator(' userId', {
+                                                initialValue: this.state.userId,
+                                                rules: [],
                                             })(
-                                                <Select>
-                                                    <Option value='低'>孙波禹</Option>
-                                                    <Option value='高'>张三</Option>
+                                                <Select placeholder="请选择项目负责人"
+                                                    disabled={this.state.isUserId}
+                                                >
+                                                    {this.state.userlist &&
+                                                        this.state.userlist.map((val) => {
+                                                            return (
+                                                                <Option key={val.id} value={val.id}>{val.title}</Option>
+                                                            )
+                                                        })
+                                                    }
                                                 </Select>
                                             )}
                                         </FormItem>
@@ -240,7 +297,7 @@ class Add extends Component {
                                     </Col>
                                     <Col span={11}>
                                         <FormItem label={intl.get("wsd.i18n.comu.question.handletime")} {...formItemLayout}>
-                                            {getFieldDecorator(' handleTime', {
+                                            {getFieldDecorator('handleTime', {
                                                 initialValue: moment(data.handleTime),
                                                 rules: [{
                                                     required: true,

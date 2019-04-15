@@ -114,19 +114,19 @@ export class PlanDefineTopTags extends Component {
                     this.setState({
                         publicTitle: '直接发布'
                     })
-                    console.log(name, 'direct')
+                    // console.log(name, 'direct')
                     break;
                 case 'approve':
                     this.setState({
                         publicTitle: '发布审批'
                     })
-                    console.log(name, 'approve');
+                    // console.log(name, 'approve');
                     break;
                 case 'abolish':
                     this.setState({
                         publicTitle: '取消发布'
                     })
-                    console.log(name, 'abolish');
+                    // console.log(name, 'abolish');
                     break;
                 default:
                     break;

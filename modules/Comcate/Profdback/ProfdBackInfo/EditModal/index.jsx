@@ -98,17 +98,11 @@ class EditModal extends Component {
        if(this.props.title === '修改修改记录'){
             axios.put(questionHandleUpdate,body).then((result) => {
               console.log(result)
-            }).catch((err) => {
-              console.log(err)
-            });
+            })
        }else{
         axios.post(questionHandleAdd,body).then((result) => {
-
           this.props.handleCancel()
-          
-        }).catch((err) => {
-          
-        });
+        })
        }
       }
     });

@@ -25,22 +25,22 @@ export class Add extends Component {
             initDone: false,
             inputMeetTime: '',
             info: {
-                title: 2,
-                meetingType: 12,
-                projectName: 11,
-                meetingAddress: 13,
-                meetTime: 14,
-                meetingUser: 15,
-                creator: 16,
-                creatTime: 17,
-                meetingRemark: 18,
+                // title: 2,
+                // meetingType: 12,
+                // projectName: 11,
+                // meetingAddress: 13,
+                // meetTime: 14,
+                // meetingUser: 15,
+                // creator: 16,
+                // creatTime: 17,
+                // meetingRemark: 18,
             }
         }
     }
 
     componentDidMount() {
         this.loadLocales();
-        console.log('加载')
+        // console.log('加载')
         this.setState({
             width: this.props.width
         })
@@ -78,9 +78,7 @@ export class Add extends Component {
                 //添加会议
                 axios.post(meetingAdd, data, true).then((result) => {
                     console.log(result)
-                }).catch((err) => {
-                    console.log(err)
-                });
+                })
             }
         });
     }

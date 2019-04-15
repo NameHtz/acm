@@ -108,15 +108,13 @@ export class PlanPreparedRelease extends Component {
     getquestionReleaseList = ()=> {
         axios.get(questionReleaseList(' ')).then((result) => {
             let data = result.data.data;
-            // console.log(data)
+            console.log(data)
             if(data.length != 0){
                 this.setState({
                     data
                 })
             }
-        }).catch((err) => {
-            console.log(err)
-        });
+        })
     }
     
     //发布审批操作
@@ -138,28 +136,26 @@ export class PlanPreparedRelease extends Component {
 
             axios.put(questionRelease,selectDataId).then((result) => {
                 console.log(result)
-            }).catch((err) => {
-                console.log(err)
-            });
+            })
 
         }else if(title === '发布审批'){
 
             axios.put(questionRelease,selectDataId).then((result) => {
                 console.log(result)
-            }).catch((err) => {
-                console.log(err)
-            });
+            })
 
         }else if(title === '取消发布'){
 
             axios.put(questionCancelRelease,selectDataId).then((result) => {
                 console.log(result)
-            }).catch((err) => {
-                console.log(err)
-            });
+            })
         }
 
 
+    }
+
+    handleCancel = () => {
+        this.props.handleCancel()
     }
 
     render() {
@@ -201,7 +197,14 @@ export class PlanPreparedRelease extends Component {
                     <div className={style.search}>
                         <Search />
                     </div>
-                    <Table rowKey={record => record.id} defaultExpandAllRows={true} pagination={false} name={this.props.name} columns={this.state.columns} rowSelection={rowSelection} dataSource={this.state.data} />
+                    <Table 
+                    rowKey={record => record.id} 
+                    defaultExpandAllRows={true} 
+                    pagination={false} 
+                    name={this.props.name} 
+                    columns={this.state.columns} 
+                    rowSelection={rowSelection} 
+                    dataSource={this.state.data} />
                 </div>
             </Modal>
         )

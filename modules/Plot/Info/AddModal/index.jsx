@@ -216,7 +216,7 @@ class AddSameLevel extends Component {
                                             rules: [],
                                         })(
                                             <TreeSelect
-                                                showSearch
+                                                // showSearch
                                                 style={{ width: "100%" }}
 
                                                 treeData={this.state.orglist}
