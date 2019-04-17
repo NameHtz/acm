@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import intl from 'react-intl-universal'
 import { Table, Spin,Icon} from 'antd'
+import StandardTable from '../../../../components/Table'
 import style from './style.less'
 import ProcessDealBtn from "../../../../components/public/TopTags/ProcessDealBtn"
 
 import dynamic from 'next/dynamic'
+
+import { meetingWfList } from '../../../../api/api'
+import axios from '../../../../api/axios';
 const locales = {
     "en-US": require('../../../../api/language/en-US.json'),
     "zh-CN": require('../../../../api/language/zh-CN.json')
@@ -14,30 +18,32 @@ class FileInfo extends Component {
         super(props)
         this.state = {
             initDone: false,
+            currentPage: 1,
+            pageSize: 10,
+            ProcessLogData:'',
             data: [
-                {
-                    key: "121",
-                    filename: "筑享云产品开发项目",
-                    starttime: "2018-12-21",
-                    endtime: "2019-11-21",
-                    nodename: "计划员审核",
-                    agent: "--",
-                    executor: "王胜平",
-                    status: "已审批",
+                // {
+                //     key: "121",
+                //     filename: "筑享云产品开发项目",
+                //     starttime: "2018-12-21",
+                //     endtime: "2019-11-21",
+                //     nodename: "计划员审核",
+                //     agent: "--",
+                //     executor: "王胜平",
+                //     status: "已审批",
                  
-                },
-                {
-                    key: "12211",
-                    filename: "ACM产品开发项目",
-                    starttime: "2018-12-21",
-                    endtime: "2019-11-21",
-                    nodename: "计划员审核",
-                    agent: "--",
-                    executor: "何文",
-                    status: "已审批",
+                // },
+                // {
+                //     key: "12211",
+                //     filename: "ACM产品开发项目",
+                //     starttime: "2018-12-21",
+                //     endtime: "2019-11-21",
+                //     nodename: "计划员审核",
+                //     agent: "--",
+                //     executor: "何文",
+                //     status: "已审批",
                    
-                }
-
+                // }
             ]
         }
     }
@@ -63,10 +69,12 @@ class FileInfo extends Component {
 
     }
     //显示流程日志
-    showProocessLogModal=()=>{
+    showProocessLogModal=(val)=>{
         console.log("流程日志")
+        
         this.setState({
-            isShowLog:true
+            isShowLog:true,
+            ProcessLogData:val,
         })
     }
     closeProocessLogModal=()=>{
@@ -84,6 +92,11 @@ class FileInfo extends Component {
     closeFlowChartModal=()=>{
         this.setState({
             isShowFlow:false
+        })
+    }
+    getMeetingWfList = () => {
+        axios.get(meetingWfList(' ', this.state.pageSize,this.state.currentPage)).then(result=>{
+
         })
     }
     render() {
@@ -156,6 +169,25 @@ class FileInfo extends Component {
                 console.log(selected, selectedRows, changeRows);
             },
         };
+
+        let pagination = {
+            total: this.state.data.length,
+            // hideOnSinglePage:true,
+            current: this.state.currentPage,
+            pageSize: this.state.pageSize,
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `每页${this.state.pageSize}/共${Math.ceil(this.state.data.length / this.state.pageSize)}页`,
+            onChange: (page, pageSize) => {
+      
+              this.setState({
+                currentPage: page,
+                pageSize
+              })
+      
+            }
+          }
+
         return (
             <div className={style.main}>
                 {this.state.initDone &&
@@ -165,10 +197,17 @@ class FileInfo extends Component {
                             <ProcessDealBtn onClickHandle={this.onClickHandle.bind(this)}></ProcessDealBtn>
                         </div>
                         <div className={style.mainScorll} >
-                        <Table columns={columns} dataSource={this.state.data} pagination={false} name={this.props.name} rowSelection={rowSelection} />
+                        <StandardTable 
+                        columns={columns} 
+                        dataSource={this.state.data} 
+                        pagination={pagination} 
+                        name={this.props.name} 
+                        rowSelection={rowSelection} />
                         </div>
                        
-                        {this.state.isShowLog && <ProcessLogModal handleCancel={this.closeProocessLogModal.bind(this)}></ProcessLogModal>}
+                        {this.state.isShowLog && <ProcessLogModal 
+                        handleCancel={this.closeProocessLogModal.bind(this)} 
+                        ProcessLogData={this.state.ProcessLogData}></ProcessLogModal>}
                         {this.state.isShowFlow && <FlowChartModal handleCancel={this.closeFlowChartModal.bind(this)} index={3}></FlowChartModal>}
                     </div>}
             </div>

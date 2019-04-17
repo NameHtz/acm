@@ -38,24 +38,24 @@ export class PlanPreparedRelease extends Component {
                     iptName: '研发部',
                     userName: '孙博宇',
                     children: [
-                        {
-                            id: 2,
-                            name: 'ACM产品开发计划1-1',
-                            code: 'XM2',
-                            planStartTime: '2018-08-10',
-                            planEndTime: '2018-08-10',
-                            iptName: '研发部',
-                            userName: '孙博宇',
-                        },
-                        {
-                            id: 3,
-                            name: 'ACM产品开发计划1-2',
-                            code: 'XM3',
-                            planStartTime: '2018-08-10',
-                            planEndTime: '2018-08-10',
-                            iptName: '研发部',
-                            userName: '孙博宇',
-                        }
+                        // {
+                        //     id: 2,
+                        //     name: 'ACM产品开发计划1-1',
+                        //     code: 'XM2',
+                        //     planStartTime: '2018-08-10',
+                        //     planEndTime: '2018-08-10',
+                        //     iptName: '研发部',
+                        //     userName: '孙博宇',
+                        // },
+                        // {
+                        //     id: 3,
+                        //     name: 'ACM产品开发计划1-2',
+                        //     code: 'XM3',
+                        //     planStartTime: '2018-08-10',
+                        //     planEndTime: '2018-08-10',
+                        //     iptName: '研发部',
+                        //     userName: '孙博宇',
+                        // }
                     ]
                 }
             ],
@@ -83,12 +83,12 @@ export class PlanPreparedRelease extends Component {
                 columns: [
                     {
                         title: intl.get('wsd.i18n.plan.feedback.name'),
-                        dataIndex: 'name',
+                        dataIndex: 'title',
                         key: 'name',
                     },
                     {
                         title: intl.get('wsd.i18n.plan.feedback.code'),
-                        dataIndex: 'code',
+                        dataIndex: 'user.code',
                         key: 'code',
                     },
                     {
@@ -108,7 +108,7 @@ export class PlanPreparedRelease extends Component {
                     },
                     {
                         title: intl.get('wsd.i18n.plan.feedback.username'),
-                        dataIndex: 'userName',
+                        dataIndex: 'user.name',
                         key: 'userName',
                     }
                 ]
@@ -121,15 +121,13 @@ export class PlanPreparedRelease extends Component {
     getQuestionHandleList = () => {
        axios.get(questionCloselist(' ')).then((result) => {
            let data = result.data.data;
-        //    console.log(data)
+           console.log(data)
            if(data.length != 0){
                this.setState({
                    data
                })
            }
-       }).catch((err) => {
-           
-       });
+       })
     }
 
 
@@ -211,7 +209,14 @@ export class PlanPreparedRelease extends Component {
                     <div className={style.search}>
                         <Search />
                     </div>
-                    <Table rowKey={record => record.id} defaultExpandAllRows={true} pagination={false} name={this.props.name} columns={this.state.columns} rowSelection={rowSelection} dataSource={this.state.data} />
+                    <Table 
+                    rowKey={record => record.id} 
+                    defaultExpandAllRows={true} 
+                    pagination={false} 
+                    name={this.props.name} 
+                    columns={this.state.columns} 
+                    rowSelection={rowSelection} 
+                    dataSource={this.state.data} />
                 </div>)}
                 {/* step2 */}
                 {this.state.step == 2 && (<div className={style.tableMain}>

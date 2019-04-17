@@ -26,19 +26,21 @@ class MeetActionForm extends Component {
       title:'',
       visible:false,
       selectDelId:[],
-      data: [ {
-        key: 1,
-        id: 1,
-        actionName: "会议项目计划",
-        actionCode: "ssddd",
-        planStartTime: "2018-12-12",
-        planEndTime: "2019-1-9",
-        iptName: "研发部门",
-        userName: "孙渤海",
-        completeStatus: 60,
-        progresslog: "查看",
-        remark: 1,
-      } ]
+      data: [ 
+      //   {
+      //   key: 1,
+      //   id: 1,
+      //   actionName: "会议项目计划",
+      //   actionCode: "ssddd",
+      //   planStartTime: "2018-12-12",
+      //   planEndTime: "2019-1-9",
+      //   iptName: "研发部门",
+      //   userName: "孙渤海",
+      //   completeStatus: 60,
+      //   progresslog: "查看",
+      //   remark: 1,
+      // } 
+    ]
     }
   }
 
@@ -81,9 +83,7 @@ class MeetActionForm extends Component {
       if(selectDelId.length !== 0 ){
         axios.deleted(meetingActionDelete,selectDelId).then((result) => {
           console.log(result)
-        }).catch((err) => {
-          console.log(err)
-        });
+        })
       }else{
         message.info('请选择要删除的会议行动项')
       }
@@ -119,15 +119,12 @@ class MeetActionForm extends Component {
     let {data} = this.props;
     axios.get(meetingActionList(data.id),'',true).then((result) => {
       let data = result.data.data;
-
       if(data.length !== 0){
         this.setState({
           data
         })
       }
-    }).catch((err) => {
-      console.log(err)
-    });
+    })
   }
 
   render() {

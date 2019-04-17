@@ -136,7 +136,6 @@ class Add extends Component {
     //     });
     // }
 
-
     //获取责任人主体、
     getOrgAndUser = () => {
         axios.get(orgTree).then(res => {
@@ -162,9 +161,7 @@ class Add extends Component {
         }, () => {
             this.getUser(v)
         })
-
     }
-
     //责任人
     getUser = (id) => {
         axios.get(getUserByOrgId(id)).then(res => {
@@ -262,8 +259,8 @@ class Add extends Component {
                                     </Col>
                                     <Col span={11}>
                                         <FormItem label={intl.get("wsd.i18n.comu.question.username")} {...formItemLayout}>
-                                            {getFieldDecorator(' userId', {
-                                                initialValue: this.state.userId,
+                                            {getFieldDecorator('userId', {
+                                                // initialValue: this.state.userId,
                                                 rules: [],
                                             })(
                                                 <Select placeholder="请选择项目负责人"
@@ -272,7 +269,9 @@ class Add extends Component {
                                                     {this.state.userlist &&
                                                         this.state.userlist.map((val) => {
                                                             return (
-                                                                <Option key={val.id} value={val.id}>{val.title}</Option>
+                                                                <Option 
+                                                                key={val.id} 
+                                                                value={val.id}>{val.title}</Option>
                                                             )
                                                         })
                                                     }

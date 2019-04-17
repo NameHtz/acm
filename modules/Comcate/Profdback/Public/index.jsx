@@ -71,12 +71,12 @@ export class PlanPreparedRelease extends Component {
                 columns: [
                     {
                         title: intl.get('wsd.i18n.plan.feedback.name'),
-                        dataIndex: 'name',
+                        dataIndex: 'title',
                         key: 'name',
                     },
                     {
                         title: intl.get('wsd.i18n.plan.feedback.code'),
-                        dataIndex: 'code',
+                        dataIndex: 'user.code',
                         key: 'code',
                     },
                     {
@@ -96,7 +96,7 @@ export class PlanPreparedRelease extends Component {
                     },
                     {
                         title: intl.get('wsd.i18n.plan.feedback.username'),
-                        dataIndex: 'userName',
+                        dataIndex: 'user.name',
                         key: 'userName',
                     }
                 ]

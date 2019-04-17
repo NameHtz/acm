@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import style from './style.less'
-import { Timeline, Icon, Modal, Table } from 'antd';
+import { Timeline, Icon, Modal, Table, message } from 'antd';
 import intl from 'react-intl-universal'
 
+import { meetingActionFeeDback } from '../../../../../api/api'
+import axios from '../../../../../api/axios';
 
 const locales = {
     "en-US": require('../../../../../api/language/en-US.json'),
@@ -27,36 +29,36 @@ class MenuInfo extends Component {
             initDone: false,
             visible: true,
             data: [
-                {
-                    id: 1,
-                    key: 1,
-                    name: "提交人",
-                    type: "提交",
-                    operater: "韩文浩",
-                    advice: "",
-                    date: "2018-12-13 13:53:12",
-                    time: "2天"
-                },
-                {
-                    id: 2,
-                    key: 2,
-                    name: "发起人",
-                    type: "发起",
-                    operater: "韩文琳",
-                    advice: "",
-                    date: "2018-12-13 13:53:12",
-                    time: "18小时"
-                },
-                {
-                    id: 3,
-                    key: 3,
-                    name: "发起人",
-                    type: "发起",
-                    operater: "韩文琳",
-                    advice: "",
-                    date: "2018-12-13 13:53:12",
-                    time: "18小时"
-                }
+                // {
+                //     id: 1,
+                //     key: 1,
+                //     name: "提交人",
+                //     type: "提交",
+                //     operater: "韩文浩",
+                //     advice: "",
+                //     date: "2018-12-13 13:53:12",
+                //     time: "2天"
+                // },
+                // {
+                //     id: 2,
+                //     key: 2,
+                //     name: "发起人",
+                //     type: "发起",
+                //     operater: "韩文琳",
+                //     advice: "",
+                //     date: "2018-12-13 13:53:12",
+                //     time: "18小时"
+                // },
+                // {
+                //     id: 3,
+                //     key: 3,
+                //     name: "发起人",
+                //     type: "发起",
+                //     operater: "韩文琳",
+                //     advice: "",
+                //     date: "2018-12-13 13:53:12",
+                //     time: "18小时"
+                // }
             ]
         }
     }
@@ -67,6 +69,8 @@ class MenuInfo extends Component {
         this.setState({
             width: this.props.width
         })
+        //获取日志
+        this.getProcessLogData()
     }
 
     loadLocales() {
@@ -97,8 +101,26 @@ class MenuInfo extends Component {
         });
         this.props.handleCancel()
     }
+    //获取会议流程列表
+    getProcessLogData = () => {
+        // processLogData 是父组件列表中点击的一行数据信息，通过信息id获取日志进程
+        let {ProcessLogData} = this.props;
+        let id = ProcessLogData.id;
+        if(id){
+            axios.get(meetingActionFeeDback(id)).then(result=>{
+                let data = result.data.data;
+                this.setState({
+                    data
+                })
+            })
+        }else{
+            
+            // message.error('数据不存在');
+        }
+    }
     render() {
 
+        let {ProcessLogData }= this.props;
 
         return (
             <div >
@@ -111,7 +133,7 @@ class MenuInfo extends Component {
                         className={style.main}
                     >
                         <div className={style.ProcessLogModal} >
-                            <p className={style.titleh}>[ACM产品开发项目] 计划发布审批流程 (发起人:韩春琳)</p>
+                            <p className={style.titleh}>[{ProcessLogData.filename}] 计划发布审批流程 (发起人:)</p>
                             <div className={style.nodecontent}>
                                 <Timeline>
 
