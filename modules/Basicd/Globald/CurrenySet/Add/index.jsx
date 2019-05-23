@@ -186,19 +186,20 @@ export class BasicdGlobalCurAdd extends Component {
                                     </Form.Item>
                                 </Col>
                             </Row>
-                            <Row>                                                        <Col span={12}>
-                                <Form.Item label={intl.get('wsd.i18n.base.currency.currsymbol')} {...formItemLayout}>
-                                    {getFieldDecorator('currSymbol', {
-                                        initialValue: this.state.info.currSymbol,
-                                        rules: [{
-                                            required: true,
-                                            message: intl.get('wsd.i18n.message.enter') + intl.get('wsd.i18n.base.currency.currsymbol'),
-                                        }],
-                                    })(
-                                        <Input />
-                                    )}
-                                </Form.Item>
-                            </Col>
+                            <Row>
+                                <Col span={12}>
+                                    <Form.Item label={intl.get('wsd.i18n.base.currency.currsymbol')} {...formItemLayout}>
+                                        {getFieldDecorator('currSymbol', {
+                                            initialValue: this.state.info.currSymbol,
+                                            rules: [{
+                                                required: true,
+                                                message: intl.get('wsd.i18n.message.enter') + intl.get('wsd.i18n.base.currency.currsymbol'),
+                                            }],
+                                        })(
+                                            <Input />
+                                        )}
+                                    </Form.Item>
+                                </Col>
 
                             </Row>
 
