@@ -1,4 +1,0 @@
-//语言类型
-export const  LOCALEPROVIDER= 'LOCALEPROVIDER';
-//初始化
-export const  INITLOCALEPROVIDER= 'INITLOCALEPROVIDER';
